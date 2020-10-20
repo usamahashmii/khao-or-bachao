@@ -1,0 +1,116 @@
+
+.list-md .item-block .item-inner{ 
+    border:none;
+}
+.new-background-color{
+    --background:transparent;
+}
+ion-input{
+    color: #b40404;
+}
+ion-label{
+    color: #bfbfbf !important;
+}
+ion-icon{
+    color: #b40404;
+    margin-top: 15px; 
+}
+ion-list{
+    background: none !important;
+}
+.item-has-focus.label-floating.sc-ion-label-md-h, .item-has-focus .label-floating.sc-ion-label-md-h, .item-has-focus.label-stacked.sc-ion-label-md-h, .item-has-focus .label-stacked.sc-ion-label-md-h{
+    color:#b40404;
+}
+.no-scroll .scroll-content {
+    overflow: hidden;
+  }
+.label{
+  margin: 0px;
+  margin-top: 6px;
+}  
+.item{
+    border: 1px solid #b40404;
+    border-radius: 40px;
+    margin-bottom: 0.6em;
+}
+.icon{
+    font-size: 1.4em;
+    color: #b40404;
+}
+.item-inner{
+    margin-left: 5px !important;
+}
+.text-input{
+    margin-top: 0px !important; 
+}
+.label-ios[floating] , .label-md[floating] {
+    -webkit-transform: translate3d(0, 10px, 0);
+    transform: translate3d(0, 10px, 0);
+}
+
+.main_heading{
+    color: #b40404;
+    font-size: 30px;
+    font-weight: bolder;
+    margin-bottom: 0px;
+}
+
+.font-color{
+    color: #bfbfbf;
+    margin-top: 0px;
+}
+.ion-color-danger{
+    --ion-color-base: #b40404 !important;
+    box-shadow: none !important;
+}
+input,a ,.par{
+    color: #b40404;
+}
+.oneTap{
+    color: #385c8e;
+    font-size: 17px;
+    margin: 0px;
+}
+
+.or{
+color: #b40404;
+margin: 0px;
+}
+.newUser{
+  //  border-bottom: 3px solid #c7c7c7;
+    padding-bottom: 3px;
+}
+.lastRow{
+     position: absolute;
+    bottom: 0px;
+    width: 100%;
+    left: 0px;
+}
+.item-input-has-focus .label-md[stacked], .input-has-focus .label-md[stacked], .item-input-has-focus .label-md[floating], .input-has-focus .label-md[floating] {
+    color: #b20404;
+}
+button.disable-hover.bar-buttons.bar-buttons-md.button.button-md.button-default.button-default-md.button-menutoggle.button-menutoggle-md{
+    background-color: #fff;
+    box-shadow: none;
+}
+button.disable-hover.bar-buttons.bar-buttons-ios.button.button-ios.button-default.button-default-ios.button-menutoggle.button-menutoggle-ios{
+    background-color: #fff;
+    box-shadow: none;
+}
+.button-md{
+    background-color: #fff;
+    box-shadow: none;
+}
+.button-ios{
+    background-color: #fff;
+    box-shadow: none;
+}
+.name-validation{
+    color: #b40404;
+    margin: 0;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-align: left;
+    margin-left: 20px;
+    margin-bottom: 1px;
+}

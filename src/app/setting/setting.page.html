@@ -1,0 +1,59 @@
+<ion-header class="header_background">
+  <ion-toolbar class="header_background">
+    <ion-buttons slot="start">
+      <ion-menu-button style="width: 4rem;"> <img style="width: 3.4rem;" src="assets/imgs/logo side menu.svg"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Setting</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding *ngIf="userAuth">
+  <ion-row *ngIf="loaderShow" class="loader-gif-row">
+    <ion-col>
+      <img class="loader-gif" src="assets/imgs/loader.gif">
+    </ion-col>
+  </ion-row>
+  <ion-row style="margin-bottom: 1em;" > 
+    <ion-col text-right size="3">
+     <img *ngIf="profileImage == null || profileImage == ''" class="profile-photo"  src="assets/imgs/profile-img.png">
+     <img *ngIf="profileImage != null && profileImage != ''" class="profile-photo"  src="{{ profileImage }}">
+    </ion-col>
+    <ion-col text-left size="6">
+      <h2 class="ProfleName">{{ name }}</h2>
+      <p class="ProfleCity">{{ cityName }}</p> 
+    </ion-col>
+  </ion-row>
+  <ion-item class="language">
+    <ion-label floating><ion-icon ios="ios-globe" md="md-globe"></ion-icon>  Language</ion-label>
+    <ion-select floating interface="popover"  required>
+      <ion-select-option  value="">Please Select</ion-select-option> 
+      <ion-select-option selected value="item1">English</ion-select-option>
+      <ion-select-option value="item2">item2</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <h3 class="red">Receive Notifications</h3>
+  </ion-item>
+ <ion-item>
+    <ion-label>Push</ion-label>
+    <ion-toggle  checked></ion-toggle>
+  </ion-item>
+  <ion-item>
+    <ion-label>Email</ion-label>
+    <ion-toggle ></ion-toggle>
+  </ion-item>
+  <ion-item>
+    <h3 class="red">Resturant Discount</h3>
+  </ion-item>
+ <ion-item>
+    <ion-label>Push</ion-label>
+    <ion-toggle checked></ion-toggle>
+  </ion-item>
+  <ion-item>
+    <ion-label>Email</ion-label>
+    <ion-toggle ></ion-toggle>
+  </ion-item>
+</ion-content>
+<ion-content *ngIf="!userAuth">
+  <h5 style="color: #b40404; text-align: center;margin-top: 30%;">Please Login first to see the content</h5>
+</ion-content>

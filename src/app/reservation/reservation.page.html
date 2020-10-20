@@ -1,0 +1,229 @@
+<ion-header class="header_background">
+  <ion-toolbar class="header_background">
+    <ion-buttons slot="start">
+      <ion-menu-button> <img style="width: 3.4rem;" src="assets/imgs/logo side menu.svg"></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="font-size: 15px;">Reservations</ion-title>
+    <ion-buttons slot="end" *ngIf="cityName == '' || !cityName" (click)="chooseCity()" class="top_title">
+      <span class="home-header-city"> Choose City</span>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <span (click)="chooseCity()" *ngIf="cityName != '' && cityName" class="home-header-city">{{ cityName }}</span>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="userAuth">
+  <ion-row *ngIf="loaderShow" class="loader-gif-row">
+    <ion-col text-center>
+      <img class="loader-gif" src="assets/imgs/loader.gif">
+    </ion-col>
+  </ion-row>
+  <ion-toolbar class="cstomHeader" no-border-top>
+    <ion-segment [(ngModel)]="pet">
+      <ion-segment-button value="upcoming" (ionSelect)="getupcomingReservations()">
+        Upcoming
+      </ion-segment-button>
+      <ion-segment-button value="previous" (ionSelect)="getupreviousReservations()">
+        Previous
+      </ion-segment-button>
+     
+    </ion-segment>
+  </ion-toolbar>
+  <div [ngSwitch]="pet">
+    <ion-list *ngSwitchCase="'upcoming'" >
+      <ion-card *ngFor="let singleCategoryDat of upcomingreservationDetails">
+       
+          <div >
+
+            <ion-row>
+              <ion-col size="12" text-center>
+                <h4 class="hotel_name">{{ singleCategoryDat.name }}</h4>
+              </ion-col>
+            </ion-row>
+            <ion-card style="margin: 0;box-shadow: none;
+           ">
+              <ion-card-content style="padding: 0;">
+                <ion-row style="padding: 0px 1em;">
+                  <ion-col size="7">
+                    
+                    <p class="img_text"><img src="assets/imgs/new-calendar-reservnew.svg" ><span>{{ singleCategoryDat.date_added }}</span></p>
+                    <p class="img_text"><img src="assets/imgs/new-persons-reservnew.svg" ><span>{{ singleCategoryDat.number_of_users }} Person</span></p>
+                    <p class="img_text"><img src="assets/imgs/new-time-reservnew.svg" ><span>
+                      {{ singleCategoryDat.date_added }}/
+                      <ng-container *ngFor="let discount of discount">
+                        <ng-container *ngIf="discount.restaurant_id == singleCategoryDat.restaurant_id && discount.discounts_id == singleCategoryDat.discount_id">
+                          {{ discount.discount_rate }}
+                        </ng-container>    
+                      </ng-container>
+                    </span></p>
+                      <p class="img_text"><img src="assets/imgs/new-location-reservnew.svg" ><span>{{ singleCategoryDat.location }} </span></p>
+                    
+                  </ion-col>
+                  <ion-col size="5">
+                    <ion-row>
+                      <ion-col size="12" style="text-align: right;">
+                          <img src="{{ coverImage }}{{ singleCategoryDat.restaurant_image }}" style="height: 5.5em;
+                          width: 5.5rem;
+                          float: right;
+                          border-radius: 5px;">
+                          <!--<ion-button expand="full" color="danger" fill="outline">
+                            <a href="tel:+13174562564">contact</a>
+                          </ion-button>-->
+                          <p *ngIf="!singleCategoryDat.rating_average" class="rating-value">0.0
+                            <img style="width: 15px;
+                            margin-left: 10px;
+                            margin-top: -3px;" src="assets/imgs/new-grey-star.svg">
+                          </p>
+                          <p *ngIf="singleCategoryDat.rating_average" class="rating-value">{{singleCategoryDat.rating_average | ratingroundoff}}
+                            <img style="width: 15px;
+                            margin-left: 10px;
+                            margin-top: -3px;" src="assets/imgs/new-grey-star.svg">
+                          </p>
+                      </ion-col>
+                    </ion-row>
+                  </ion-col>
+              </ion-row>
+              </ion-card-content>  
+            </ion-card>
+            <ion-row>
+              <ion-col class="qr-btn-col">
+                <ion-button class="qr-code-btn" (click)="scanQr(singleCategoryDat)">Scan Qr</ion-button>
+              </ion-col>
+            </ion-row>   
+        </div>
+        
+      </ion-card>
+     
+       <!-- <ion-card *ngFor="let singleCategoryDat of upcomingreservationDetails">
+          <img src="{{ coverImage }}{{ singleCategoryDat.restaurant_image }}"/>
+          <div class="catsubtwo">
+            <p class="white">{{ singleCategoryDat.name }}</p>
+            <p class="white">{{ singleCategoryDat.location }} 
+              <span *ngFor="let distanceArr of distanceArr">
+                <span *ngIf="distanceArr.restaurantId == singleCategoryDat.restaurants_id">
+                  ( <span>
+                      <img class="home-loc-icon-class" src="assets/imgs/home-loc-icon.png">
+                    </span> {{ distanceArr.distance | roundoff }}Km away )
+                </span> 
+            </span>
+            </p>
+            
+            <p *ngIf="singleCategoryDat.rating_count == '5' || singleCategoryDat.rating_count > '5'" class="smallStars">
+              <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+            </p>
+            <p *ngIf="singleCategoryDat.rating_count == '4'" class="smallStars">
+              <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            </p>
+            <p *ngIf="singleCategoryDat.rating_count == '3'" class="smallStars">
+              <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            </p>
+            <p *ngIf="singleCategoryDat.rating_count == '2'" class="smallStars">
+              <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            </p>
+            <p *ngIf="singleCategoryDat.rating_count == '1'" class="smallStars">
+              <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            </p>
+            <p *ngIf="singleCategoryDat.rating_count == '0'" class="smallStars">
+              <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+              <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            </p>
+            <p class="white">235 Reservations</p> 
+          </div>
+          <div class="catDate">
+            <p class="white">{{ singleCategoryDat.date_added }}</p> 
+          </div>
+        </ion-card>
+      
+
+      -->
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'previous'" >
+      <ion-card *ngFor="let singleCategoryDat of previousreservationDetails">
+      <div>
+
+        <ion-row>
+          <ion-col size="12" text-center>
+            <h4 class="hotel_name">{{ singleCategoryDat.name }}</h4>
+          </ion-col>
+        </ion-row>
+        <ion-card style="margin: 0;box-shadow: none;
+       ">
+          <ion-card-content style="padding: 0;">
+            <ion-row style="padding: 0px 1em;">
+              <ion-col size="7">
+                
+                  <p class="img_text"><img src="assets/imgs/new-calendar-reservnew.svg" ><span>{{ singleCategoryDat.date_added }}</span></p>
+                  <p class="img_text"><img src="assets/imgs/new-persons-reservnew.svg" ><span>{{ singleCategoryDat.number_of_users }} Person</span></p>
+                  <p class="img_text"><img src="assets/imgs/new-time-reservnew.svg" ><span>
+                    {{ singleCategoryDat.date_added }}/
+                    <ng-container *ngFor="let discount of discount">
+                      <ng-container *ngIf="discount.restaurant_id == singleCategoryDat.restaurant_id && discount.discounts_id == singleCategoryDat.discount_id">
+                        {{ discount.discount_rate }}
+                      </ng-container>    
+                    </ng-container>
+                  </span></p>
+                  <p class="img_text"><img src="assets/imgs/new-location-reservnew.svg" ><span>{{ singleCategoryDat.location }}</span></p>
+                
+              </ion-col>
+              <ion-col size="5">
+                <ion-row>
+                  <ion-col size="12" style="text-align: right;">
+                      <img src="{{ coverImage }}{{ singleCategoryDat.restaurant_image }}" style="height: 5.5em;
+                      width: 5.5rem;
+                      float: right;
+                      border-radius: 5px;">
+                      <!--<ion-button expand="full" color="danger" fill="outline">
+                        <a href="tel:+13174562564">contact</a>
+                      </ion-button>-->
+                      <p *ngIf="!singleCategoryDat.rating_average" class="rating-value">0.0
+                        <img style="width: 15px;
+                        margin-left: 10px;
+                        margin-top: -3px;" src="assets/imgs/new-grey-star.svg">
+                      </p>
+                      <p *ngIf="singleCategoryDat.rating_average" class="rating-value">{{singleCategoryDat.rating_average | ratingroundoff}}
+                        <img style="width: 15px;
+                        margin-left: 10px;
+                        margin-top: -3px;" src="assets/imgs/new-grey-star.svg">
+                      </p>
+                      
+                    </ion-col>
+                </ion-row>
+              </ion-col>
+          </ion-row>
+          </ion-card-content>  
+        </ion-card>
+    </div>
+  </ion-card>
+    </ion-list>
+  </div>
+  
+</ion-content>
+<ion-content *ngIf="!userAuth">
+  <h5 style="color: #b40404; text-align: center;margin-top: 30%;">Please Login first to see the content</h5>
+</ion-content>

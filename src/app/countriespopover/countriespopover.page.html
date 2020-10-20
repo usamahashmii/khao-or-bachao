@@ -1,0 +1,20 @@
+
+<ion-content>
+  <h4 style="text-align: center;font-weight: 550;font-size: 14px;
+  margin-bottom: 25px;">Select a country</h4>
+  <ion-row style="margin: 10px;
+  margin-left: 15px;
+  " *ngFor="let countriesArray of countriesArray" (click)="selectCountryCode(countriesArray)">
+    <ion-col size="2">
+      <img src="assets/imgs/{{ countriesArray.flag }}.svg">
+    </ion-col>
+    <ion-col size="7">
+     <p style="margin: 0;
+     font-size: 14px;font-weight: 500;">{{ countriesArray.name }}</p>
+    </ion-col>
+    <ion-col>
+      <p style="margin: 0;
+      font-weight: 550;">{{ countriesArray.code }}</p>
+     </ion-col>
+  </ion-row>
+</ion-content>

@@ -1,0 +1,125 @@
+<ion-header class="header_background">
+  <ion-toolbar class="header_background">
+    <ion-buttons slot="start">
+      <img (click)="goToReservationDetail()" src="assets/imgs/menu.png" class="backArrow">
+    </ion-buttons>
+    <ion-title>Reservation Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card *ngFor="let restaurantDetail of restaurantDetail">
+    <img src="../assets/imgs/menuone.png"/>
+    <div class="catsubtwo">
+      <p class="white">{{ restaurantDetail.name }}</p>
+      <p class="white">{{ restaurantDetail.location }} 
+        <span *ngFor="let distanceArr of distanceArr">
+          <span *ngIf="distanceArr.restaurantId == restaurantDetail.restaurants_id">
+            ( {{ distanceArr.distance | roundoff }}Km away )
+          </span>
+          
+      </span>
+      <span><img class="person-img-size" src="assets/imgs/person-img.png">
+        </span>
+      <span class="person-count">{{ personsCount }} Person</span>
+      </p>
+        <!--<ionic4-star-rating #rating
+        activeIcon = "ios-star"
+        defaultIcon = "ios-star-outline"
+        activeColor = "#ff0000"
+        defaultColor = "#aaaaaa"
+        readonly = "true"
+        rating = "{{ restaurantDetail.rating_count }}"
+        fontSize = "20px"
+        >
+      </ionic4-star-rating>-->
+      <p *ngIf="restaurantDetail.rating_count == '5' || restaurantDetail.rating_count > '5'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+      </p>
+      <p *ngIf="restaurantDetail.rating_count == '4'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+      </p>
+      <p *ngIf="restaurantDetail.rating_count == '3'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+      </p>
+      <p *ngIf="restaurantDetail.rating_count == '2'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+      </p>
+      <p *ngIf="restaurantDetail.rating_count == '1'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+      </p>
+      <p *ngIf="restaurantDetail.rating_count == '0'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+      </p>
+    </div>
+    <div class="sidetagone">
+      <img src="assets/imgs/bg_discount.png" />
+      <div class="myOverlay">
+        <p class="white txtOne">-{{ discount_rate }}%</p>
+        <p *ngIf="type == 'Day'" class="white txtTwo" >{{ start_time }}</p>
+        <p *ngIf="type == 'Item'" class="white txtTwo" >{{ end_date }}</p>
+      </div>
+    </div>
+    
+  </ion-card> 
+ 
+  <ion-row class="detailBorder" padding>
+    <ion-col size="12"> <h3  class="red"  text-center><b>User Details</b></h3></ion-col>
+    <ion-col class="red" text-left size="6">Name</ion-col>
+    <ion-col text-right size="6">{{ name }}</ion-col>
+    <ion-col class="red"  text-left size="3">Email</ion-col>
+    <ion-col text-right col-6>{{ email }}</ion-col>
+    <ion-col  class="red" text-left size="6">Phone Number</ion-col>
+    <ion-col *ngIf="number" text-right size="6">{{ number }}</ion-col>
+    <!--<ion-col *ngIf="!number" text-right size="6">
+      <ion-input clearInput class="number-input" [(ngModel)]="number">
+      </ion-input>
+    </ion-col>-->
+  </ion-row>
+  <ion-row *ngIf="loaderShow" class="loader-gif-row">
+    <ion-col>
+      <img class="loader-gif" src="assets/imgs/loader.gif">
+    </ion-col>
+  </ion-row>
+
+  <!---->
+  <!--<ion-card class="welcome-card">
+    <ion-button expand='block' margin (click)="goToBarcodeScan()">Click to scan a barcode</ion-button>
+    <div *ngIf="scannedData">
+      <p>
+        Scanned Code Text : <b>{{ scannedData["text"] }}</b>
+      </p>
+      <p>
+        Scanned Code Format : <b>{{ scannedData["format"] }}</b>
+      </p>
+    </div>
+  </ion-card>
+-->
+  
+</ion-content>
+<ion-footer (click)="confirmReservation()" text-center padding>
+  <h1 class="white-footer">Confirm</h1>
+</ion-footer>

@@ -1,0 +1,210 @@
+.no-favourites{
+    color: #b40404;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 20%;
+    font-weight: 550;
+}
+  .loader-gif{
+    width: 60%;
+    background: none;
+  }
+.catsubtwo{
+    position: absolute;
+    left: 9px;
+    top: 14px;
+    text-align: left;
+}
+.catDate{
+    position: absolute;
+    right: 9px;
+    top: 17px;
+    text-align: right; 
+}
+  .white{
+    color:#fff;
+    width: 80%;
+}
+.stars{
+  color: rgba(255, 255, 255, 0.48);
+}
+.red{
+  color:#b40404;
+}
+.hotelName{
+    font-size: 18px;
+}
+.heart{
+   font-size: 24px;
+}
+p{
+    margin: 4px 0px;
+}
+.starSize{
+    font-size: 20px;
+}
+.reviewItem{
+    position: relative;
+    top: -4px;
+    left: 2px;
+}
+.home-header-city{
+  color: #fff;
+  font-size: 13px;
+  margin-right: 3px;
+  text-transform: capitalize;
+}
+.home-header-home-loc{
+  width: 14px;
+  margin-right: 6px;
+}
+.home-header-location-search{
+  width: 14px;
+  margin-right: 6px;
+  margin-left: 10px;
+}
+
+  //@extend
+  .scrolling-wrapper-row{
+    padding: 20px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+  
+    .card {
+      display: inline-block;
+      margin: 10px;
+      margin-top: 0;
+      margin-left: 0;
+      margin-bottom: 0;
+    }
+  }
+  .scoll-img{
+    width: 60px;
+    border-radius: 50%;
+    height: 60px;
+  }
+  .scoll-card-name{
+    margin: 10px;
+    margin-top: 0;
+    margin-left: 0;
+    color: #454545;
+    font-size: 12px;
+    text-align: center;
+  }
+  ion-scroll[scrollX] {
+      white-space: nowrap;
+      height: 120px;
+      overflow: hidden;
+  
+      .scroll-item {
+        display: inline-block;
+      }
+  
+      .selectable-icon{
+        margin: 10px 20px 10px 20px;
+        color: red;
+        font-size: 100px;
+      }
+  
+      ion-avatar img{
+        margin: 10px;
+      }
+    }
+  
+    ion-scroll[scroll-avatar]{
+      height: 60px;
+    }
+  
+    //
+    .new-restaurant-name{
+      margin-top: 8px;
+      font-weight: 600;
+      font-size: 18px;
+      color: #615c5c;
+      text-transform: capitalize;
+    }
+    .new-restaurant-address{
+      font-size: 12px;
+    }
+    .sc-ion-card-md-s img {
+      display: inline-block;
+      width: 100%;
+    }
+    .new-reservations-count{
+      font-size: 12px;
+    }
+        //new css of the new code 
+  .customSlider-new{
+    overflow-y: scroll;
+    height: 14.1em;
+    position: absolute;
+    right: -9.4em;
+    top: 0.5666em;
+    display: inline-grid;
+  }
+  .sidetagone-new{
+    width: 31.5%;
+    margin-top: 0.1em;
+    position: sticky;
+    touch-action: auto;
+  }
+  .sidetagone-new .myOverlay-new{
+    width: 100%;
+    height: auto;
+    position: absolute;
+    z-index: 99;
+    top: 11px;
+    right: 0em;
+    opacity: 1;
+    color: #fff;
+  }
+  .myOverlay-new{
+  
+    z-index: 99;
+    /* top: 11px; */
+    opacity: 1;
+    color: #fff;
+    margin-top: -54px;
+  }
+  .white-new{
+    color:#fff;
+  }
+  .txtOne-new{
+    margin-top: 4px;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+  }
+  .txtTwo-new{
+    margin: -8px 0px 0px 0px;
+    font-weight: 700;
+    font-size: 9px;
+    text-align: center;
+  }
+  .starReview{
+    color: #fff;
+    margin-top: 12px;
+    margin-left: 0px;
+  
+  }
+  .backArrow{
+    position: absolute;
+    z-index: 999;
+    width: 5%;
+    top: 4%;
+    left: 5%;
+  }
+  ion-card ion-card-content{
+    padding-bottom: 5px
+  }
+  .home-header-city{
+    color: #fff;
+    font-size: 13px;
+    margin-right: 3px;
+    text-transform: capitalize;
+  }

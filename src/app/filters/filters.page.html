@@ -1,0 +1,143 @@
+<ion-header class="header_background">
+  <ion-toolbar class="header_background">
+     <ion-row size="12">
+      <ion-col class="backArw" size="2">
+        <img class="arrowLeft" routerLink="/tabs/home" src="assets/imgs/menu.png">
+      </ion-col>
+      <ion-col size="8" text-center>
+        <ion-title class="headTitle">Filter And Sort</ion-title>
+      </ion-col>
+      <ion-col size="2">
+        
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+ 
+
+<ion-content class="alpha-list-page">
+  <ion-row>
+    <ion-col text-right size="2">
+    <h3 class="red"><b>Sort</b></h3>
+    </ion-col>
+  </ion-row>  
+  <ion-row>
+    <ion-col (click)="LowToHigh()" class="filter-label" size="3" style="margin-left: 1em;">
+      <ion-label>
+        <p>$-$$$</p>
+        <p>Price</p>
+        <p>Low to High</p>
+      </ion-label>
+    </ion-col>
+    <ion-col (click)="highToLow()" class="filter-label" size="3">
+      <ion-label>
+        <p>$$$-$</p>
+        <p>Price</p>
+        <p>High to Low</p>
+      </ion-label>
+      </ion-col>
+    <ion-col (click)="rating()" class="filter-label" size="3">
+      <ion-label >
+        <img class="filter-loc-icon-img" src="assets/imgs/rating-icon-img.png">
+        <p>Star</p>
+        <p>Rating</p>
+      </ion-label>
+    </ion-col>
+  </ion-row>
+  <ion-row style="margin-top: 20px;">
+  <ion-col (click)="openMaps()" class="filter-label" size="3" style="margin-left: 1em;">
+      <ion-label>
+        <img class="filter-loc-icon-img" src="assets/imgs/location-icon-img.png">
+        <p>Distance</p>
+        <p>Near to Far</p>
+      </ion-label>
+    </ion-col>
+    <ion-col (click)="rating()" class="filter-label" size="3">
+      <ion-label>
+        <img class="filter-loc-icon-img" src="assets/imgs/like-icon-img.png">
+        <p style="font-size: 12px;">Recomended</p>
+        <p>Most reserved</p>
+      </ion-label>
+    </ion-col>
+  </ion-row>
+      <!--<ion-row>
+    <ion-col size="4">
+    <ion-item (click)="LowToHigh()" lines="none">
+      <ion-label class="filter-label">
+        <p>$-$$$</p>
+        <p>Price</p>
+        <p>Low to High</p>
+      </ion-label>
+      <ion-radio slot="start" value="biff" ></ion-radio>
+    </ion-item>
+    </ion-col>
+    <ion-col size="4">
+      <ion-item (click)="highToLow()" lines="none">
+        <ion-label class="filter-label">
+          <p>$-$$$</p>
+          <p>Price</p>
+          <p>High to Low</p>
+        </ion-label>
+        <ion-radio slot="start" value="biff" ></ion-radio>
+      </ion-item>
+      </ion-col>
+      <ion-col size="4">
+        <ion-item (click)="rating()" lines="none">
+          <ion-label class="filter-label">
+            <p>$-$$$</p>
+            <p>Star</p>
+            <p>Rating</p>
+          </ion-label>
+          <ion-radio slot="start" value="biff" ></ion-radio>
+        </ion-item>
+        </ion-col>
+  </ion-row>-->
+  <ion-row padding>
+    <ion-col text-left size="3" style="padding-right: 0px;">
+     <h3 class="red"><b>Filters</b></h3>
+     <span>Discount</span>
+    </ion-col>
+  </ion-row> 
+  <ion-row>
+    <ion-col (click)="clickDiscount('10')" class="ds" size="2" style="margin-left: 1em;">
+        <img src="assets/imgs/discountMiny.png">
+        <ion-label class="discountMinyLabel">10%</ion-label>
+    </ion-col>
+    <ion-col (click)="clickDiscount('20')" class="ds" size="2">
+      <img src="assets/imgs/discountMiny.png">
+      <ion-label class="discountMinyLabel">20%</ion-label>
+  </ion-col>
+  <ion-col (click)="clickDiscount('30')" class="ds" size="2">
+    <img src="assets/imgs/discountMiny.png">
+    <ion-label class="discountMinyLabel">30%</ion-label>
+</ion-col>
+<ion-col (click)="clickDiscount('40')" class="ds" size="2">
+  <img src="assets/imgs/discountMiny.png">
+  <ion-label class="discountMinyLabel">40%</ion-label>
+</ion-col>
+<ion-col (click)="clickDiscount('50')" class="ds" size="2">
+  <img src="assets/imgs/discountMiny.png">
+  <ion-label class="discountMinyLabel">50%</ion-label>
+</ion-col>
+  </ion-row> 
+  <!--<ion-row>
+    <ion-col size="4">
+    <ion-item class="discounts" lines="none">
+      <ion-label class="discount-label" >
+        <p>10%</p>
+      </ion-label>
+      <ion-radio slot="start" value="biff" ></ion-radio>
+    </ion-item>
+    </ion-col>
+  </ion-row>-->
+  <ion-row class="bg_badge">
+    <ion-col size="12" >
+      <ion-col size="4" style="padding-left:21px;"> <b class="red">Price Range</b></ion-col>
+      <ion-col size="4" text-right><b class="red">$-$$$</b></ion-col>
+    </ion-col>
+    <ion-col size="12">
+        <ion-badge></ion-badge>
+        <ion-range (ionChange)="changeRange($event)" min="0" max="99" step="33" value="0" snaps color="danger"></ion-range>
+    </ion-col>
+  </ion-row>  
+</ion-content>

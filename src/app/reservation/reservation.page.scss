@@ -1,0 +1,175 @@
+
+.catsubtwo{
+    position: absolute;
+    left: 9px;
+    top: 14px;
+    text-align: left;
+}
+ion-menu-button{
+  width: 100px;
+}
+.catDate{
+    position: absolute;
+    right: 9px;
+    top: 17px;
+    text-align: right; 
+}
+  .white{
+    color:#fff;
+    font-size: 11px;
+}
+.stars{
+  color: rgba(255, 255, 255, 0.48);
+}
+.red{
+  color:#b40404;
+}
+.hotelName{
+    font-size: 18px;
+}
+.heart{
+   font-size: 24px;
+}
+p{
+    margin: 4px 0px;
+}
+.starSize{
+    font-size: 20px;
+}
+.reviewItem{
+    position: relative;
+    top: -4px;
+    left: 2px;
+}
+.sc-ion-segment-md-h {
+    --background: none;
+    --background-checked: none;
+    --background-hover: rgba(var(--ion-color-primary-rgb,56,128,255),0.04);
+    --background-activated: rgba(var(--ion-color-primary-rgb,56,128,255),0.16);
+    --color: rgba(var(--ion-text-color-rgb,0,0,0),0.6);
+    --color-checked: #b40404;
+    --color-checked-disabled: var(--color-checked);
+    --indicator-color: transparent;
+  }
+  ion-card{
+    //height: 10.5em;
+    padding-bottom: 9px;
+    box-shadow: none;
+    box-shadow: 0px 0px 7px 2px #eeeeee;
+  }
+ 
+  .home-loc-icon-class{
+    width: 9px;
+  }
+  .revText{
+    margin: 5px 0px;
+  }
+  .grey{
+  color: grey;
+  }
+  .bigStars ion-icon{
+    font-size: 45px;
+  }
+  .smallStars ion-icon{
+  font-size: 25px;
+  }
+  .smallStars{
+  margin: 0px;
+  }
+
+  .hotel_name{
+    background: #ECECEC;
+    padding: 12px;
+    font-weight: 600;
+    border-radius: 2%;
+    margin: 10px;
+    font-size: 15px;
+    text-transform: capitalize;
+}
+.parah{
+     margin: 0px;
+}
+.bgColor{
+    background: #eeeeee;
+    margin: 0px 7px;
+    border-radius: 2%;
+    padding: 13px 0px;
+    margin-top: 10px;
+}
+.rImage{
+    width: 30px;
+}
+.raccordin{
+    background: #eeeeee;
+    padding: 6px 0px;
+    margin: 0px 7px;
+}
+.accordImage{
+    width: 30px;
+    padding-top: 9px;
+}
+.img_text{
+    margin: 10px;
+    margin-left: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    display: flex;
+}
+.img_text span{
+    position: relative;
+    top: 0;
+    left: 20px;
+    color: #505050;
+    font-size: 12px;
+    line-height: 24px;
+    font-weight: 400;
+}
+.img_text img{
+    width: 15px;
+}
+.rating-value{
+  float: left;
+    background: #ececec;
+    padding: 10px;
+    margin: 0;
+    text-align: start;
+    font-weight: 550;
+    display: flex;
+    padding-left: 30px;
+    font-size: 15px;
+    width: 5.5rem;
+    float: right;
+}
+.qr-code-btn{
+  --background: #EF9503;
+  width: 90%;
+  --box-shadow: none;
+  --border-radius: 5px;
+  text-transform: capitalize;
+  font-size: 14px;
+  font-weight: 500;
+}
+.qr-btn-col{
+  text-align: center;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+.home-header-city{
+  color: #fff;
+  font-size: 13px;
+  margin-right: 3px;
+  text-transform: capitalize;
+}
+// ios css
+.sc-ion-segment-ios-hion-toolbar:not(.ion-color):not(.ion-color).sc-ion-segment-ios-s > .segment-button-checked, ion-toolbar:not(.ion-color) .sc-ion-segment-ios-h:not(.ion-color).sc-ion-segment-ios-s > .segment-button-checked{
+  background: none;
+  border: none;
+  border-bottom: 2px solid #b40404;
+  color: #b40404;
+  padding-bottom: 10px;
+    margin-top: 10px;
+}
+.sc-ion-segment-ios-hion-toolbar:not(.ion-color):not(.ion-color).sc-ion-segment-ios-s > ion-segment-button, ion-toolbar:not(.ion-color) .sc-ion-segment-ios-h:not(.ion-color).sc-ion-segment-ios-s > ion-segment-button{
+  border: none;
+  color: #000;
+}

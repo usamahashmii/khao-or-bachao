@@ -1,0 +1,119 @@
+
+<ion-header class="header_background">
+  <ion-toolbar class="header_background">
+    <ion-row size="12">
+      <ion-col size="1">
+        <img class="arrowLeft" routerLink="/tabs/home" src="assets/imgs/backArrow.png">
+      </ion-col>
+      <ion-col size="10" text-center>
+        <ion-title>Profile</ion-title>
+      </ion-col>
+      <ion-col size="1">
+        <img class="settingRight"  routerLink="/setting"  src="assets/imgs/svs.png">
+      </ion-col>
+    </ion-row>
+   
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content *ngIf="userAuth" class="ion-padding">
+
+  <ion-row  >
+    <ion-col *ngIf="loaderShow" class="loader-gif-row">
+      <img class="loader-gif" src="assets/imgs/loader.gif">
+     </ion-col>
+  </ion-row>
+  <ion-list class="items-middle" class="ion-text-center">
+   <ion-row style="margin-bottom: 2em;"> 
+     <ion-col class="ion-text-right" size="3">
+      <img *ngIf="profileImage == null || profileImage == ''" class="profile-photo" (click)="takeProfilePicture()" src="assets/imgs/profile-img.png" width="100%">
+      <img *ngIf="profileImage != null && profileImage != ''" class="profile-photo" (click)="takeProfilePicture()" src="{{ profileImage }}" width="100%">
+      
+    </ion-col>
+     <ion-col class="ion-text-left" size="8">
+       <h2 class="ProfleName">{{ name }}</h2>
+       <p class="ProfleCity">{{ cityName }}</p> 
+     </ion-col>
+   </ion-row>
+    <ion-item >
+      <ion-icon class="icon-color" class="ion-text-left" ios="ios-person" md="md-person" slot="start"></ion-icon>
+       <ion-label color="ligh-grey"  position="floating">
+        Full Name
+      </ion-label>
+      <ion-input [value]="name"
+      [(ngModel)]="name"
+      clearInput
+      type="text" 
+      (ionFocus)="checkFocusName()"
+      (ionBlur)="checkBlurName()"
+      (ionChange)="nameKeyUp()"
+      ></ion-input>
+    </ion-item>
+    <h4 *ngIf="validationName" class="name-validation">Please fill the required field</h4>
+    <h4 *ngIf="keyupNameBool" class="name-validation">Your name is invalid</h4>
+    <h4 *ngIf="characterLengthNameBool" class="name-validation">Characters length is too long</h4>
+    <ion-item >
+      <ion-icon class="icon-color" class="ion-text-left" name="mail" slot="start"></ion-icon>
+      <ion-label color="ligh-grey"  position="floating">Email</ion-label>
+      <ion-input [value]="email"
+      [(ngModel)]="email"
+      type="email"
+      clearInput 
+      type="email"
+      (ionFocus)="checkFocusEmail()"
+      (ionBlur)="checkBlurEmail()" 
+      (ionChange)="emailKeyUp()" 
+      [disabled]="!showPasswordInput"></ion-input>
+    </ion-item>
+    <h4 *ngIf="validationEmail" class="name-validation">Please fill the required field</h4>
+    <h4 *ngIf="keyupEmailBool" class="name-validation">Your Email is Invalid</h4>
+    <!-- <h4 *ngIf="checkEmailExist" class="name-validation">Your entered email already exists</h4> -->
+    <ion-item >
+      <ion-icon class="icon-color" class="ion-text-left" ios="ios-call" md="md-call" slot="start"></ion-icon>
+      <ion-label color="ligh-grey"  position="floating">cell phone Number</ion-label>
+      <ion-input 
+      [value]="number"
+      [(ngModel)]="number" type="tel"
+      maxlength="10"
+      (ionFocus)="checkFocusMobile()"
+      (ionBlur)="checkBlurMobile()" 
+      (ionChange)="numberKeyUp()"
+      ></ion-input>
+    </ion-item>
+    <h4 *ngIf="validationMobile" class="name-validation">Please fill the required field</h4>
+    <h4 *ngIf="keyupNumberBool" class="name-validation">Phone Number is Invalid</h4>
+    <h4 *ngIf="characterLengthNumberBool" class="name-validation">Characters Length is too Long</h4>
+    <ion-item *ngIf="showPasswordInput">
+      <ion-icon class="icon-color" class="ion-text-left" name="lock" slot="start"></ion-icon>
+      <ion-label color="ligh-grey"  position="floating">Password</ion-label>
+      <ion-input [(ngModel)]="password"
+      clearInput
+      (ionFocus)="checkFocusPassword()"
+      (ionBlur)="checkBlurPassword()" 
+      (ionChange)="passwordKeyUp()" 
+       type="password"></ion-input>
+    </ion-item>
+    <span *ngIf="showPasswordInput">
+      <h4 *ngIf="validationPassword" class="name-validation">Please fill the required field</h4>
+    </span>
+    <h4 *ngIf="characterLengthPasswordBool" class="name-validation">Password is too weak</h4>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button (click)="update()" class="updatebtn" shape="round" color="danger">Update</ion-button>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button (click)="logout()" shape="round" fill="outline" color="medium">Logout</ion-button>
+      </ion-col>
+    </ion-row>
+   
+  </ion-list>
+  <ion-row class="lastRow" class="ion-padding">
+    <ion-col class="ion-text-center">
+        <p style="color:#bfbfbf;"><span class="newUser" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-content *ngIf="!userAuth">
+    <h5 style="color: #b40404; text-align: center;margin-top: 30%;">Please Login first to see the content</h5>
+</ion-content>

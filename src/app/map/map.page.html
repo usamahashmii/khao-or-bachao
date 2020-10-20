@@ -1,0 +1,28 @@
+<ion-header class="header_background">
+  <ion-toolbar class="header_background">
+     <ion-row size="12">
+      <ion-col class="backArw" size="2">
+        <img class="arrowLeft" routerLink="/tabs/home" src="assets/imgs/menu.png">
+      </ion-col>
+      <ion-col size="8" text-center>
+        <ion-title class="headTitle">Buffet</ion-title>
+        <p style="margin: 0;color: #fff;font-size: 10px;">{{ mapResponseLength }} Restaurant</p>
+      </ion-col>
+      <!-- <ion-col size="2">
+        <img (click)="goToSingleCategory()" class="menu-icon-img" src="assets/imgs/menu-icon.png">
+      </ion-col> -->
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col *ngIf="loaderShow" class="loader-gif-row">
+      <img class="loader-gif" src="assets/imgs/loader.gif">
+    </ion-col>
+  </ion-row>
+  <div #map id="map"></div> 
+</ion-content>
+<ion-footer>
+ <p (click)="openFiltersPage()" class="filter-dash-p"><img style="width: 24px; margin-right: 11px;" src="assets/imgs/filter-dash.png"> Filters</p>
+</ion-footer>

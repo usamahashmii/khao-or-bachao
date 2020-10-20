@@ -1,0 +1,189 @@
+[_nghost-myc-c3] input[_ngcontent-myc-c3] {
+    font-size: 16px;
+    /* margin: 6px 0; */
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #b40404;
+    background: none;
+    border-radius: 29px;
+}
+.list-md .item-block .item-inner {
+    border-bottom: none !important;
+}
+.toolbar .toolbar-background{
+    background-color: #b40404;
+ 
+}
+.toolbar-title-md{
+    color:#fff !important;
+}
+.header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before{
+    background-image: none !important;
+}
+.sidebarIcon{
+    width: 18px;
+    margin-right: 5px;
+}
+.sidebaeTitle{
+    position: relative;
+    top: -3px;
+    font-size: 18px;
+}
+.label-md {
+    margin: 10px 8px 10px 0;
+}
+.bar-button-menutoggle-md ion-icon{
+    color: #fff;
+}
+.bar-button-menutoggle-ios ion-icon{
+    color: #fff;
+}
+.tabs-md .tab-button{
+    color: #080808;
+}
+.tabs-ios .tab-button{
+    color: #080808;
+}
+.tabs-md .tab-button-icon{
+    color: #080808;
+}
+.tabs-ios .tab-button-icon{
+    color: #080808;
+}
+.tabs-md .tab-button[aria-selected=true] .tab-button-icon{
+    color: #b40404;
+}
+.tabs-ios .tab-button[aria-selected=true] .tab-button-icon{
+    color: #b40404;
+}
+.tabs-md .tab-button[aria-selected=true]{
+    color: #b40404;
+}
+.tabs-ios .tab-button[aria-selected=true]{
+    color: #b40404;
+}
+.toast-wrapper.toast-bottom {
+    border-radius: 10px;
+    width: 95%;
+    margin-bottom: 10px;
+}
+.toast-wrapper.toast-top {
+    border-radius: 10px;
+    width: 95%;
+    margin-top: 10px;
+}
+.toast-md .toast-message {
+    font-size: 1.5rem;
+    color: #fff;
+    //padding: 20px; 
+    padding-left: 10px;
+}
+.toast-ios .toast-message {
+    font-size: 1.5rem;
+    color: #fff;
+    //padding: 20px; 
+    padding-left: 10px;
+}
+.toast-container {
+    border-radius: 5px;
+}
+//alert box scss
+.alert-md .alert-button , .alert-ios .alert-button {
+   border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: #b40404;
+    background-color: transparent;
+    margin: 5px 8px 0 0;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.alert-md .alert-title , .alert-ios .alert-title {
+    color: #b40404;
+    font-size: 17px;
+    text-align: center;
+}
+.alert-md .alert-wrapper , .alert-ios .alert-wrapper{
+    border-radius: 10px;
+}
+.cstomHeader .toolbar-background-md {
+    background: #ffff !important;
+  }
+  .cstomHeader .toolbar-background-ios {
+    background: #ffff !important;
+  }
+  .segment-md .segment-button.activated, .segment-md .segment-button.segment-activated{
+    border-color: #b40404;
+    color: #b40404;
+  }
+  .segment-ios .segment-button.activated, .segment-ios .segment-button.segment-activated{
+    border-color: #b40404;
+    color: #b40404;
+  }
+  .segment-md .segment-button{
+     color: #080808;
+     font-size: 1rem;
+  }
+  .segment-ios .segment-button{
+    color: #080808;
+    font-size: 1rem;
+ }
+
+ ion-split-pane{
+    --border: none !important;
+    ion-menu{
+    --background: #b40404 !important;
+    ion-content{
+    --background: #b40404 !important;
+    ion-list-header{
+    --background: #b40404 !important;
+    --color: #FFFFFF !important;
+    }
+    ion-item{
+    --background: #b40404 !important;
+    --color: #FFFFFF !important;
+    ion-icon{ color: #FFFFFF !important; }
+    }
+    }
+    }
+    }
+
+    .list-md {
+
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    ion-header ion-toolbar:first-child{
+        --background: #b40404 !important;
+    }
+    //loader
+    //background/shadow of loader
+    .sc-ion-loading-md {
+        --background: none;
+        box-shadow: none;
+    }
+    .loading-wrapper.sc-ion-loading-ios {
+        --background: none;
+        box-shadow: none;
+    }
+    //hide loader spinner
+    .loading-spinner.sc-ion-loading-md , .loading-spinner.sc-ion-loading-ios {
+        display: none;
+    }
+    .spinner-bubbles.sc-ion-loading-md, .spinner-circles.sc-ion-loading-md, .spinner-crescent.sc-ion-loading-md, .spinner-dots.sc-ion-loading-md, .spinner-lines.sc-ion-loading-md, .spinner-lines-small.sc-ion-loading-md{
+        display: none;
+    }
+    .header-ios ion-toolbar:last-child{
+        --border-width: 0 0 0px;
+      }
+      .list-ios , .list-md{
+        background: none;
+      }
+      ion-toolbar.in-toolbar ion-buttons, ion-toolbar.in-toolbar ion-title{
+          padding-right: 9px;
+      }

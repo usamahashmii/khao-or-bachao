@@ -1,0 +1,335 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <img (click)="openSideMenu()" class="menu-btn-img" src="assets/imgs/headerLogo.png">
+    </ion-buttons>
+    <ion-title>
+      <div class="vl"></div> Location
+    </ion-title>
+    <ion-buttons slot="end">
+      <img (click)="searchLocation()" class="location-search-img" src="assets/imgs/location-search.png">
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-row *ngIf="showSearchBar">
+    <ion-col>
+      <ion-searchbar style="border-radius: 30px;" (ionInput)="searchChanged($event)" [showCancelButton]="shouldShowCancel" (ionCancel)="onCancel($event)"></ion-searchbar>
+    </ion-col>
+  </ion-row>
+</ion-header>
+<ion-content>
+  <ion-grid style="padding: 0">
+    <ion-row *ngIf="loaderShow" class="loader-gif-row">
+      <ion-col>
+        <img class="loader-gif" src="assets/imgs/loader.gif">
+       </ion-col>
+    </ion-row>
+   
+      <div *ngIf="!isSearch">
+       
+        <div *ngFor="let getAllCountries of getAllCountries; let i = index" (click)="openCity(getAllCountries , i)" >
+          <ng-container *ngIf="getAllCountries.country_name == 'Pakistan' || getAllCountries.country_name == 'Hong Kong S.A.R.'" >
+            <div style="display: flex;
+            margin: 10px;
+            width: 100%;">
+            <ion-row style="width: 100%;">
+              <ion-col size="3" style="text-align: right;
+              padding-right: 18px;">
+            
+                <span><img class="flag-imgs" src="{{ getAllCountries.flag_url }}"></span>
+              </ion-col>
+              <ion-col>
+                <span><p class="country-name">{{ getAllCountries.country_name }}</p></span>
+              </ion-col>
+              <ion-col size="2">
+                <span><img class="down-arrow" src="assets/imgs/down-arrow.png" /></span>
+              </ion-col>
+            </ion-row>
+          </div>
+          <hr *ngIf="selectedIndex != i" style="border-bottom: 1px solid #e0e0e0;">
+        </ng-container>      
+      <!--show city-->
+      
+      <div *ngIf="selectedIndex == i" style="margin-left: 72px;transition-property: width;
+      transition-duration: 2s">
+        <ng-container *ngFor="let getAllCities of getAllCities">
+          <ng-container *ngIf="getAllCities.country_id == getAllCountries.countries_id">
+            <div (click)="chooseCity(getAllCities)" style="display: flex;
+            width: 100%;">
+              <span><img class="monument-imgs" src="{{ getAllCities.logo_url }}"></span>
+              <p class="country-name" style="margin-left: 15px;">{{ getAllCities.city_name }}</p>
+            </div>
+          </ng-container>
+          
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="isSearch">
+    <div *ngFor="let getAllCountries of getAllCountries1; let i = index" (click)="openCity(getAllCountries , i)" >
+      <div style="display: flex;
+      margin: 10px;
+      width: 100%;">
+      <ion-row style="width: 100%;">
+        <ion-col size="3" style="text-align: right;
+        padding-right: 18px;">
+          <span><img class="flag-imgs" src="{{ breakcountryPath1 }}{{ getAllCountries.flag }}{{ breakcountryPath2 }}"></span>
+        </ion-col>
+        <ion-col>
+          <span><p class="country-name">{{ getAllCountries.country_name }}</p></span>
+        </ion-col>
+        <ion-col size="2">
+          <span><img class="down-arrow" src="assets/imgs/down-arrow.png" /></span>
+        </ion-col>
+      </ion-row>
+    </div>
+    <hr *ngIf="selectedIndex != i" style="border-bottom: 1px solid #e0e0e0;">
+           
+  <!--show city-->
+  <div *ngIf="selectedIndex == i" style="margin-left: 72px;transition-property: width;
+  transition-duration: 2s">
+    <ng-container *ngFor="let getAllCities of getAllCities">
+      <ng-container *ngIf="getAllCities.country_id == getAllCountries.countries_id">
+        <div (click)="chooseCity(getAllCities)" style="display: flex;
+        width: 100%;">
+         <!--<img class="monument-imgs" src="{{ city_logo_path }}{{ logo }}">-->
+          <p class="country-name" style="margin-left: 15px;">{{ getAllCities.city_name }}</p>
+        </div>
+      </ng-container>
+      
+    </ng-container>
+  </div>
+</div>
+</div>
+
+    <!--<ion-row class="country-detail-row-sa">
+      <ion-col (click)="openCity('hk')" size="2">
+        <img class="flag-imgs" src="assets/imgs/hong-kong.png">
+      </ion-col>
+      <ion-col (click)="openCity('hk')" size="8">
+        <p class="country-name">Hong Kong</p>
+      </ion-col>
+      <ion-col size="2">
+        <img (click)="openCity('hk')" class="down-arrow" src="assets/imgs/down-arrow.png" />
+      </ion-col>
+    
+      <div *ngIf="showHkCities" style="margin-left: 20px;">
+        <ion-row>
+          <ion-col size="4" style="height: 30px;">
+            <img class="monument-imgs" src="assets/imgs/islamabad.png">
+          </ion-col>
+          <ion-col (click)="chooseCity('hong kong')" style="height: 30px;">
+            <p class="country-name">Hong Kong</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4" style="height: 30px;">
+            <img class="monument-imgs" src="assets/imgs/lahore.png">
+          </ion-col>
+          <ion-col (click)="chooseCity('sai kung')" style="height: 30px;">
+            <p class="country-name">Sai Kung</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4" style="height: 30px;">
+            <img class="monument-imgs" src="assets/imgs/islamabad.png">
+          </ion-col>
+          <ion-col (click)="chooseCity('tutng chung')" style="height: 30px;">
+            <p class="country-name">Tung Chung</p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-row>-->
+   <!--<ion-row class="country-detail-row-sk">
+      <ion-col size="2">
+        <img class="flag-imgs" src="assets/imgs/SK.png">
+      </ion-col>
+      <ion-col size="8">
+        <p class="country-name">South Korea</p>
+      </ion-col>
+      <ion-col size="2">
+        <img (click)="openCity('sk')" class="down-arrow" src="assets/imgs/down-arrow.png" />
+      </ion-col>
+        
+        <div *ngIf="showSkCities" style="margin-left: 20px;">
+          <ion-row>
+            <ion-col size="4" style="height: 30px;">
+              <img class="monument-imgs" src="assets/imgs/islamabad.png">
+            </ion-col>
+            <ion-col (click)="chooseCity('seoul')" style="height: 30px;">
+              <p class="country-name">Seoul</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4" style="height: 30px;">
+              <img class="monument-imgs" src="assets/imgs/lahore.png">
+            </ion-col>
+            <ion-col (click)="chooseCity('busan')" style="height: 30px;">
+              <p class="country-name">Busan</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4" style="height: 30px;">
+              <img class="monument-imgs" src="assets/imgs/islamabad.png">
+            </ion-col>
+            <ion-col (click)="chooseCity('incheon')" style="height: 30px;">
+              <p class="country-name">Incheon</p>
+            </ion-col>
+          </ion-row>
+        </div>
+    </ion-row>
+    <ion-row class="country-detail-row-swe">
+      <ion-col size="2">
+        <img class="flag-imgs" src="assets/imgs/SWE.png">
+      </ion-col>
+      <ion-col size="8">
+        <p class="country-name">Sweden</p>
+      </ion-col>
+      <ion-col size="2">
+        <img (click)="openCity('swe')" class="down-arrow" src="assets/imgs/down-arrow.png" />
+      </ion-col>
+     
+      <div *ngIf="showSweCities" style="margin-left: 20px;">
+        <ion-row>
+          <ion-col size="4" style="height: 30px;">
+            <img class="monument-imgs" src="assets/imgs/islamabad.png">
+          </ion-col>
+          <ion-col (click)="chooseCity('malmo')" style="height: 30px;">
+            <p class="country-name">Malmo</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4" style="height: 30px;">
+            <img class="monument-imgs" src="assets/imgs/lahore.png">
+          </ion-col>
+          <ion-col (click)="chooseCity('uppsala')" style="height: 30px;">
+            <p class="country-name">Uppsala</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4" style="height: 30px;">
+            <img class="monument-imgs" src="assets/imgs/islamabad.png">
+          </ion-col>
+          <ion-col (click)="chooseCity('lund')" style="height: 30px;">
+            <p class="country-name">Lund</p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-row>
+    <ion-row class="country-detail-row-hun">
+      <ion-col size="2">
+        <img class="flag-imgs" src="assets/imgs/HUN.png">
+      </ion-col>
+      <ion-col size="8">
+        <p class="country-name">Hungary</p>
+      </ion-col>
+      <ion-col size="2">
+        <img (click)="openCity('hun')" class="down-arrow" src="assets/imgs/down-arrow.png" />
+      </ion-col>
+     
+      <div *ngIf="showHunCities" style="margin-left: 20px;">
+        <ion-row>
+          <ion-col size="4" style="height: 30px;">
+            <img class="monument-imgs" src="assets/imgs/islamabad.png">
+          </ion-col>
+          <ion-col (click)="chooseCity('budapest')" style="height: 30px;">
+            <p class="country-name">Budapest</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4" style="height: 30px;">
+            <img class="monument-imgs" src="assets/imgs/lahore.png">
+          </ion-col>
+          <ion-col (click)="chooseCity('pecs')" style="height: 30px;">
+            <p class="country-name">Pecs</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4" style="height: 30px;">
+            <img class="monument-imgs" src="assets/imgs/islamabad.png">
+          </ion-col>
+          <ion-col (click)="chooseCity('eger')" style="height: 30px;">
+            <p class="country-name">Eger</p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-row>
+    <ion-row class="country-detail-row-mex">
+      <ion-col size="2">
+        <img class="flag-imgs" src="assets/imgs/MEX.png">
+      </ion-col>
+      <ion-col size="8">
+        <p class="country-name">Mexico</p>
+      </ion-col>
+      <ion-col size="2">
+        <img (click)="openCity('mex')" class="down-arrow" src="assets/imgs/down-arrow.png" />
+      </ion-col>
+     
+      <div *ngIf="showMexCities" style="margin-left: 20px;">
+        <ion-row>
+          <ion-col size="4" style="height: 30px;">
+            <img class="monument-imgs" src="assets/imgs/islamabad.png">
+          </ion-col>
+          <ion-col (click)="chooseCity('tijuana')" style="height: 30px;">
+            <p class="country-name">Tijuana</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4" style="height: 30px;">
+            <img class="monument-imgs" src="assets/imgs/lahore.png">
+          </ion-col>
+          <ion-col (click)="chooseCity('merida')" style="height: 30px;">
+            <p class="country-name">Merida</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4" style="height: 30px;">
+            <img class="monument-imgs" src="assets/imgs/islamabad.png">
+          </ion-col>
+          <ion-col (click)="chooseCity('cancun')" style="height: 30px;">
+            <p class="country-name">Cancun</p>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-row>
+    <ion-row class="country-detail-row-ind">
+      <ion-col size="2">
+        <img class="flag-imgs" src="assets/imgs/IND.png">
+      </ion-col>
+      <ion-col size="8">
+        <p class="country-name">India</p>
+      </ion-col>
+      <ion-col size="2">
+        <img (click)="openCity('ind')" class="down-arrow" src="assets/imgs/down-arrow.png" />
+      </ion-col>
+    </ion-row>-->
+    <!--show city-->
+    <!--<div *ngIf="showIndCities" style="margin-left: 20px;">
+      <ion-row>
+        <ion-col size="4" style="height: 30px;">
+          <img class="monument-imgs" src="assets/imgs/islamabad.png">
+        </ion-col>
+        <ion-col (click)="chooseCity('new delhi')" style="height: 30px;">
+          <p class="country-name">New Delhi</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" style="height: 30px;">
+          <img class="monument-imgs" src="assets/imgs/lahore.png">
+        </ion-col>
+        <ion-col (click)="chooseCity('mumbai')" style="height: 30px;">
+          <p class="country-name">Mumbai</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4" style="height: 30px;">
+          <img class="monument-imgs" src="assets/imgs/islamabad.png">
+        </ion-col>
+        <ion-col (click)="chooseCity('chennai')" style="height: 30px;">
+          <p class="country-name">Chennai</p>
+        </ion-col>
+      </ion-row>
+    </div>-->
+  </ion-grid>
+</ion-content>

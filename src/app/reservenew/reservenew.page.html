@@ -1,0 +1,176 @@
+<ion-header class="header_background">
+  <ion-toolbar class="header_background">
+    <ion-buttons slot="start">
+     <img style="height: 15px;margin-left: 20px;" (click)="goToHome()" src="assets/imgs/new-reservnew-back-img.svg">
+    </ion-buttons>
+    <ion-title style="padding-left: 16%;">Reservation Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row  >
+    <ion-col *ngIf="loaderShow" class="loader-gif-row">
+      <img class="loader-gif" src="assets/imgs/loader.gif">
+     </ion-col>
+  </ion-row>
+<ion-row>
+  <ion-col size="12" text-center>
+    <h4 class="hotel_name">Hello rest Name</h4>
+  </ion-col>
+</ion-row>
+<ion-card style="margin: 0;box-shadow: none;
+border-bottom: 1px solid #707070;">
+  <ion-card-content style="padding: 0;">
+    <ion-row style="padding: 0px 1em;">
+      <ion-col size="7">
+         
+          <p class="img_text"><img src="assets/imgs/new-calendar-reservnew.svg" ><span>{{ reservationDate }}</span></p>
+          <p class="img_text"><img src="assets/imgs/new-persons-reservnew.svg" ><span>{{ personsCount }} Person</span></p>
+          <p *ngIf="discountId != ''" class="img_text"><img src="assets/imgs/new-time-reservnew.svg" ><span>{{ start_time }}/{{ discount_rate }}%</span></p>
+          <p class="img_text"><img src="assets/imgs/new-location-reservnew.svg" ><span>{{ location }}</span></p>
+         
+      </ion-col>
+      <ion-col size="5">
+        <ion-row>
+          <ion-col size="12" style="text-align: right;">
+              <img *ngIf="restaurantImageUrl && restaurantImage" src="{{ restaurantImageUrl }}{{ restaurantImage }}" style="height: 5.5em;
+              width: 5.5rem;
+              border-radius: 5px;">
+              <ion-button (click)="contactUs()" expand="full" color="danger" fill="outline">
+                <a>Contact us</a>
+              </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+  </ion-row>
+  </ion-card-content>
+  
+</ion-card>
+  <ion-card style="box-shadow: 0px 0px 3px 0px #b9acac">
+    <ion-card-content style="padding-left: 10px;">
+      <p style="font-weight: 500;
+      font-size: 14px;color: #505050;
+    font-weight: 550;
+    margin-left: 10px;">User Details</p>
+      <hr style="border-bottom: 1px solid #F2F2FD;">
+      <ion-row>
+        <ion-col style="padding-right: 0;padding: 0;" size="1">
+          <img style="width: 15px;margin-top: 48px;" src="assets/imgs/person-name-img.svg">
+        </ion-col>
+        <ion-col style="padding-left: 0;">
+          <ion-item [class.highlight-name-input]="validationName" style="margin-left: 10px;margin-bottom: 5px;">
+            <ion-label style="color: #000;
+            font-size: 14px;
+            font-weight: 350;" position="floating">Name</ion-label>
+            <ion-input
+            (ionFocus)="checkFocusName()"
+            (ionBlur)="checkBlurName()"
+            (ionChange)="nameKeyUp()"
+            [value]="personName" [(ngModel)]="personName" ></ion-input>
+          </ion-item>
+          <h4 *ngIf="validationName" class="name-validation">Please fill the required field</h4>
+        <h4 *ngIf="keyupNameBool" class="name-validation">Your name is invalid</h4>
+        <h4 *ngIf="characterLengthNameBool" class="name-validation">Characters length is too long</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col style="padding-right: 0;padding: 0;" size="1">
+          <img style="width: 15px;margin-top: 48px;" src="assets/imgs/call-img.svg">
+        </ion-col>
+        <div (click)="presentPopover()" style="display: flex;
+        margin-top: 35px;">
+          <img style="margin-left: 2px;width: 20px;" src="assets/imgs/{{ countryFlag }}.svg">
+          <p style="color: #E58F08;margin-left: 5px;margin-top: 12px;font-size: 11px;">{{ phoneCode }}</p>
+          <img style="width: 10px;margin-left: 5px;margin-top: 6px;" src="assets/imgs/pick-phone-code-dropdown.svg">
+        </div>
+        <ion-col size="8" style="padding-left: 0;">
+          <ion-item style="margin-left: 10px;">
+            <ion-label style="color: #000;
+            font-size: 14px;
+            font-weight: 350;" position="floating">Phone</ion-label>
+            <ion-input
+            maxlength="10" type="tel"
+            (ionFocus)="checkFocusMobile()"
+            (ionBlur)="checkBlurMobile()" 
+            [class.highlight-email-input]="colorMobileBool"
+            [(ngModel)]="phoneNumber"></ion-input>
+          </ion-item>
+          <p *ngIf="validationMobile" class="name-validation">Please fill the required field</p>
+          <p *ngIf="keyupNumberBool" class="name-validation">Phone Number is Invalid</p>
+          <p *ngIf="characterLengthNumberBool" class="name-validation">Characters Length is too Long</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col style="padding-right: 0;padding: 0;" size="1">
+          <img style="width: 15px;margin-top: 48px;" src="assets/imgs/email-img.svg">
+        </ion-col>
+        <ion-col style="padding-left: 0;">
+          <ion-item [class.highlight-email-input]="validationEmail" style="margin-left: 10px;margin-bottom: 5px;">
+            <ion-label style="color: #000;
+            font-size: 14px;
+            font-weight: 350;" position="floating">Email</ion-label>
+            <ion-input
+            (ionFocus)="checkFocusEmail()"
+            (ionBlur)="checkBlurEmail()" 
+            (ionChange)="emailKeyUp()" 
+            [value]="email" [(ngModel)]="email" ></ion-input>
+          </ion-item>
+          <h4 *ngIf="validationEmail" class="name-validation">Please fill the required field</h4>
+          <h4 *ngIf="keyupEmailBool" class="name-validation">Your Email is Invalid</h4>
+        </ion-col>
+      </ion-row>
+
+      
+    </ion-card-content>
+  </ion-card>
+  <p *ngIf="!userId || userId == ''" style="text-align: center;
+  color: #B40404;
+  font-weight: 400;
+  margin-top: 30px;
+  font-size: 17px;">log in to my<br> 
+    "KhaoAur Bachao" account</p>
+    <p style="text-align: center;
+    font-size: 13px;
+    margin-top: 30px;
+    color: #505050;
+    line-height: 20px;">
+      by clicking on "confirm reservation" , I agree with<br>
+     <a (click)="goToTerms()" style="text-decoration: underline;">terms of use</a> and <a
+     (click)="goToPolicy()" style="text-decoration: underline;">privacy policy</a>
+    </p>
+<!--<ion-row class="bgColor" >
+
+  <ion-col (click)="openRestaurantLocation()" size="12" text-center>
+    <img src="assets/imgs/r-largelocation.png" class="rImage">
+    <p class="parah">Location</p>
+  </ion-col>
+ 
+</ion-row>
+<ion-row class="raccordin" style="margin-top: 23px;">
+  <ion-col size="2" text-center>
+    <img src="assets/imgs/r-policy.png" class="accordImage" >
+  </ion-col>
+  <ion-col (click)="handleButtonClickPolicy()" size="8">
+      <h5>Restaurant Privacy Policy</h5>
+  </ion-col>
+  <ion-col size="2" text-center>
+    <ion-icon name="arrow-forward" style="margin-top: 1.1em;"></ion-icon>
+  </ion-col>
+</ion-row>
+<ion-row class="raccordin">
+  <ion-col size="2" text-center>
+    <img src="assets/imgs/r-terms.png" class="accordImage" >
+  </ion-col>
+  <ion-col (click)="handleButtonClickConditions()" size="8">
+      <h5>Terms and conditions</h5>
+  </ion-col>
+  <ion-col size="2" text-center>
+    <ion-icon name="arrow-forward" style="margin-top: 1.1em;"></ion-icon>
+  </ion-col>
+</ion-row>-->
+</ion-content>
+<ion-footer (click)="confirmReservation()" text-center padding>
+  <h1 class="white-footer">Confirm Reservation</h1>
+</ion-footer>

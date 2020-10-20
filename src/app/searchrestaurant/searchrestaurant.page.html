@@ -1,0 +1,120 @@
+<ion-header class="header_background">
+  <ion-toolbar class="header_background">
+    <ion-buttons slot="start">
+      <img (click)="goBack()" style="width: 14px;margin-left: 14px;" src="assets/imgs/back-arrow.png">
+    </ion-buttons>
+  <ion-row>
+    <ion-col class="search-input-col">
+      <ion-input (ionChange)="searchChanged($event)" placeholder="Write Here" class="search-input"
+      ></ion-input>
+      <div class="search-icon-div">
+        <img class="home-header-location-search" src="assets/imgs/location-search.png">
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ng-container *ngFor="let singleCategoryDat of restaurantsArrayTopaz">
+    <ion-card *ngIf="singleCategoryDat.restaurant_image" (click)="openRestaurantAsSingle(singleCategoryDat)">
+      <ion-card-header style="padding: 0;">
+        <img style="height: 168px;" src="{{ coverImage }}{{ singleCategoryDat.restaurant_image }}">
+        <div style="position: absolute;
+        top: 26px;
+        background: #e0e0e0;
+        color: #000;
+        padding: 8px;
+        width: 65px;">
+          <span *ngIf="singleCategoryDat.rating_average" style="float: left;
+          margin-right: 4px;">{{ singleCategoryDat.rating_average | ratingroundoff }}</span>
+          <span *ngIf="!singleCategoryDat.rating_average" style="float: left;
+          margin-right: 4px;">0.0</span>
+          <img style="width: 15px;" src="assets/imgs/new-grey-star.svg">
+        </div>
+        <div style="position: absolute;
+        top: 65px;
+        background: #e0e0e0;
+        color: #000;
+        padding: 8px;
+        width: 65px;">
+          <span>new</span>
+        </div>
+        <ion-row *ngIf="singleCategoryDat.allow_discounts == 'Yes'" class="scrolling-wrapper-row">
+          <ion-col style="position: absolute;bottom: 0;left: 0;padding-bottom: 0;">
+            <div class="scrolling-wrapper">
+              <ng-container *ngFor="let discount of discounts">
+                <div *ngIf="singleCategoryDat.restaurants_id == discount.restaurant_id" class="card">
+                  <img style="width: 60px;" src="assets/imgs/bg_discount.png" />
+                  <div class="myOverlay-new">
+                    <!--<p class="white-new txtTwo-new" style="margin-top: 10px;">22:30</p>
+                    <p class="white-new txtOne-new">-20%</p>-->
+                    <p *ngIf="discount.type == 'Day'" class="white-new txtTwo-new" style="margin-top: 5px;margin-left: -1px;">{{ discount.start_time | stringbreak }}</p>
+                  <p *ngIf="discount.type == 'Item'" class="white-new txtTwo-new" style="margin-top: 9px;">{{ discount.end_date }}</p>
+                  <p *ngIf="discount.type == 'Day'" class="white-new txtOne-new">-{{ discount.discount_rate }}%</p>
+                  <p *ngIf="discount.type == 'Item'" class="white-new txtOne-new" style="margin-top: 3px;">-{{ discount.discount_rate }}%</p>
+                  </div> 
+                </div>
+              </ng-container>
+            
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-card-header>
+      <ion-card-content style="padding-right: 0;padding-bottom: 5px;">
+        <ion-row style="padding-top: 0;">
+          <ion-col style="text-align: left;">
+            <h3 class="new-restaurant-name">{{ singleCategoryDat.name }}</h3> 
+          </ion-col>
+          <!-- <ion-col style="text-align: right;padding-top: 0;padding-right: 0;" size="2">
+            <img src="assets/imgs/new-gift-img.svg">
+          </ion-col> -->
+        </ion-row>
+        <ion-row>
+          <ion-col style="text-align: left;padding-top: 0;" size="8">
+            <h3 class="new-restaurant-address">{{ singleCategoryDat.location }}</h3> 
+          </ion-col>
+          <ion-col style="text-align: right;margin-right: 15px;padding-top: 0;">
+            <ng-container *ngFor="let distanceArr of distanceArr">
+              <span *ngIf="distanceArr.restaurantId == singleCategoryDat.restaurants_id && distanceArr.distance != 'NaN'">
+                <h3>
+                  <span>
+                    <img style="width: 13px;" src="assets/imgs/new-location-img.svg">
+                  </span>{{ distanceArr.distance | roundoff }}km
+                </h3>
+              </span>
+            </ng-container> 
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="padding-top: 0;text-align: left;" size="8">
+            <h3 *ngFor="let reservationCount of reservationCount" style="margin: 0;" class="new-reservations-count">
+              <ng-container *ngIf="reservationCount.restaurant_id == singleCategoryDat.restaurants_id">
+                {{ reservationCount.reservation_count }} reservations
+              </ng-container>
+            </h3>           </ion-col>
+          <ion-col style="padding-top: 0;" style="padding-top: 0;text-align: right;margin-right: 15px;display: flex;">
+            <span style="margin-right: 2px;">
+              <img style="width: 13px;" src="assets/imgs/new-red-dollar.svg">
+            </span>
+            <span style="margin-right: 2px;">
+              <img style="width: 13px;" src="assets/imgs/new-red-dollar.svg">
+            </span>
+            <span style="margin-right: 2px;">
+              <img style="width: 13px;" src="assets/imgs/new-white-dollar.svg">
+            </span>
+            <span style="margin-right: 2px;">
+              <img style="width: 13px;" src="assets/imgs/new-white-dollar.svg">
+            </span>
+            <span style="margin-right: 2px;">
+              <img style="width: 13px;" src="assets/imgs/new-white-dollar.svg">
+            </span>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+</ion-content>

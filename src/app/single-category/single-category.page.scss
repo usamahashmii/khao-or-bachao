@@ -1,0 +1,376 @@
+
+ion-card {
+   // position: relative;
+   // text-align: center;
+    //height: 15.5em;
+  }
+ion-card .myImg{
+  height: 15.5em;
+}
+  .card-title {
+    position: absolute;
+    top: 36%;
+    font-size: 2.0em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  .card-subtitle {
+    font-size: 1.0em;
+    position: absolute;
+    top: 52%;
+    width: 100%;
+    color: #fff;
+  }
+  .header_title{
+    position: absolute;
+    top: 10%;
+    text-align: center;
+    width: 100%;
+    font-weight: 400;
+    color: #fff;
+  }
+  .header_subtitle{
+    position: absolute;
+    top: 17%;
+    text-align: center;
+    font-size: 12px;
+    width: 100%;
+    font-weight: 100;
+    color: #fff;
+  }
+  .stake{
+    border-bottom: 1px solid #fff;
+    //padding-bottom: 1.1em;
+    font-size: 26px;
+  }
+  .header_subone{
+    position: absolute;
+    top: 22%;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 100;
+    color: #fff;
+    width: 72%;
+    left: 15%;
+  }
+  .header_button{
+    position: absolute;
+    top: 22%;
+    left: 35%;
+    display: none;
+  }
+  .sidetagone{
+    position: absolute;
+    right: 9px;
+    top: 1em;
+    width: 10%;
+  }
+  .sidetagtwo{
+    position: absolute;
+    right: 9px;
+    top: 5em;
+    width: 10%;
+  }
+  .sidetagthree{
+    position: absolute;
+    right: 9px;
+    top: 9em;
+    width: 10%;
+  }
+  .sidetagone .myOverlay{
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    z-index: 99;
+    bottom: 0px;
+    opacity: 0.5;
+    color: #fff;
+  
+  }
+  .sidetagtwo .myOverlay{
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    z-index: 99;
+    bottom: 0px;
+    opacity: 0.5;
+    color: #fff;
+  
+  }
+  .sidetagthree .myOverlay{
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    z-index: 99;
+    bottom: 0px;
+    opacity: 0.5;
+    color: #fff;
+  
+  }
+  .txtOne{
+    margin-top: 2.6em;
+    font-weight: 700;
+    font-size: 10px;
+  }
+  .txtTwo{
+    margin: -5px 0px 0px 0px;
+    font-weight: 700;
+    font-size: 10px;
+  }
+  .card-title {
+    position: absolute;
+    top: 36%;
+    font-size: 2.0em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .card-subtitle {
+    font-size: 1.0em;
+    position: absolute;
+    top: 52%;
+    width: 100%;
+    color: #fff;
+  }
+  
+.catsubone{
+    position: absolute;
+    top: 8px;
+    left: 9px;
+  }
+    .catsubone p{
+    font-size: 1.5em;
+    font-weight: 400;
+    color: #b40404;
+    background: rgba(0, 0, 0, 0.57);
+    padding: 0px 12px;
+    margin-top: 7px;
+    }
+    .catsubtwo{
+    position: absolute;
+    left: 9px;
+    bottom: 0px;
+    text-align: left;
+    font-size: 12px;
+    }
+    .catsubtwo p{
+        margin:4px 0px;
+        width: 85%;
+    }
+    .white{
+      color:#fff;
+    }
+    .stars{
+    color: rgba(255, 255, 255, 0.48);
+    }
+    .red{
+    color:#b40404;
+    }
+    .sidetagone p{
+      font-size: 10px;
+    }
+    
+    .sidetagstwo p{
+    font-size: 10px;
+    }
+    
+    .sidetagsthree p{
+    font-size: 10px;
+    }
+    .ion-color-light {
+        --ion-color-base: #fff !important;
+        --ion-color-base-rgb: var(--ion-color-light-rgb, 244, 245, 248) !important;
+        --ion-color-contrast: #ffffff !important;
+        --ion-color-contrast-rgb: var(--ion-color-light-contrast-rgb, 0, 0, 0) !important;
+        --ion-color-shade: #ffffff !important;
+        --ion-color-tint: var(--ion-color-light-tint, #f5f6f9) !important;
+    }
+    //new css of the new code 
+.customSlider-new{
+  overflow-y: scroll;
+  height: 14.1em;
+  position: absolute;
+  right: -9.4em;
+  top: 0.5666em;
+  display: inline-grid;
+}
+.sidetagone-new{
+  width: 31.5%;
+  margin-top: 0.1em;
+  position: sticky;
+  touch-action: auto;
+}
+.sidetagone-new .myOverlay-new{
+  width: 100%;
+  height: auto;
+  position: absolute;
+  z-index: 99;
+  top: 11px;
+  right: 0em;
+  opacity: 1;
+  color: #fff;
+}
+.myOverlay-new{
+
+  z-index: 99;
+  /* top: 11px; */
+  opacity: 1;
+  color: #fff;
+  margin-top: -54px;
+}
+.white-new{
+  color:#fff;
+}
+.txtOne-new{
+  margin-top: 4px;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+}
+.txtTwo-new{
+  margin: -8px 0px 0px 0px;
+  font-weight: 700;
+  font-size: 9px;
+  text-align: center;
+}
+.starReview{
+  color: #fff;
+  margin-top: 12px;
+  margin-left: 0px;
+
+}
+.backArrow{
+  position: absolute;
+  z-index: 999;
+  width: 5%;
+  top: 4%;
+  left: 5%;
+}
+.location-search-span{
+  position: absolute;
+  width: 20px;
+  right: 8px;
+  top: 18px;
+}
+.home-loc-icon-class{
+  width: 8px;
+  display: initial;
+}
+.revText{
+    margin: 5px 0px;
+}
+.grey{
+  color: grey;
+}
+.bigStars ion-icon{
+    font-size: 45px;
+}
+.smallStars ion-icon{
+  font-size: 25px;
+}
+.smallStars{
+  margin: 0px;
+  width: 50% !important;
+}
+
+
+.oneLine{
+  display:flex;
+  position: relative;
+  top: -8px;
+}
+.loader-gif-row{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #00000047;
+}
+
+.loader-gif{
+  width: 60%;
+  background: none;
+  padding: 10px 0px 10px 10px;
+}
+
+//@extend
+.scrolling-wrapper-row{
+  padding: 20px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  .card {
+    display: inline-block;
+    margin: 10px;
+    margin-top: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+}
+.scoll-img{
+  width: 60px;
+  border-radius: 50%;
+  height: 60px;
+}
+.scoll-card-name{
+  margin: 10px;
+  margin-top: 0;
+  margin-left: 0;
+  color: #454545;
+  font-size: 12px;
+  text-align: center;
+}
+ion-scroll[scrollX] {
+    white-space: nowrap;
+    height: 120px;
+    overflow: hidden;
+
+    .scroll-item {
+      display: inline-block;
+    }
+
+    .selectable-icon{
+      margin: 10px 20px 10px 20px;
+      color: red;
+      font-size: 100px;
+    }
+
+    ion-avatar img{
+      margin: 10px;
+    }
+  }
+
+  ion-scroll[scroll-avatar]{
+    height: 60px;
+  }
+
+  //
+  h3.new-restaurant-name{
+    margin-top: 12px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #615c5c;
+  }
+  .new-restaurant-address{
+    font-size: 12px;
+  }
+  .sc-ion-card-md-s img {
+    display: inline-block;
+    width: 100%;
+  }
+  .new-reservations-count{
+    font-size: 12px;
+  }

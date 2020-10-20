@@ -1,0 +1,808 @@
+<!--<ion-header class="header_background">
+  <ion-toolbar class="header_background">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Single Resturant</ion-title>
+  </ion-toolbar>
+</ion-header>-->
+<ion-content>
+  <!--<div *ngFor="let arrayHere of arrayHere">
+    <div [innerHTML]="hello">{{ arrayHere.valuePresent }}</div>
+  </div>-->
+
+  <img (click)="goBack()" src="assets/imgs/new-single-cat-img.svg" class="backArrow">
+  <ion-row *ngIf="loaderShow" class="loader-gif-row">
+    <ion-col text-center>
+      <img class="loader-gif" src="assets/imgs/loader.gif">
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-slides *ngFor="let restaurantDetail of restaurantDetail" pager>
+
+      <!--<ion-slide >
+        <img src="{{ restaurantImageUrl }}{{ restaurantDetail.restaurant_image }}"/>
+      </ion-slide>
+    -->
+      <ion-slide >
+        <img src="../assets/imgs/single-restaurant-img.png"/>
+      </ion-slide>
+    
+      <ion-slide >
+        <img src="../assets/imgs/single-restaurant-img.png"/>
+      </ion-slide>
+    
+    </ion-slides>
+   
+    <img (click)="shareClick()" class="heart-size share" src="assets/imgs/share.png" >
+
+    <div style="height: 38px;
+    width: 38px;
+    border-radius: 50%;
+    background: #fff;
+    z-index: 111;
+    margin-top: -20px;
+    box-shadow: 0px 2px 9px 0px #c7bebe;
+    margin-left: 78%">
+      <img 
+      *ngIf="!favRestaurant" (click)="addToFavourite()"
+      style="width: 18px;
+      margin-top: 11px;
+      margin-left: 10px;" src="assets/imgs/new-heart-img.svg">
+      <img 
+      *ngIf="favRestaurant"
+      style="width: 18px;
+      margin-top: 11px;
+      margin-left: 10px;" src="assets/imgs/red-heart.png">
+    </div>
+  </ion-row>
+  <div style="position: absolute;
+  top: 20%;
+  background: #e0e0e0;
+  color: #000;
+  padding: 8px;
+  width: 75px;
+  z-index: 9999;">
+    <span *ngIf="rating_average" style="float: left;
+    font-size: 17px;
+    margin-right: 4px;">{{ rating_average | ratingroundoff }}</span>
+    <span *ngIf="!rating_average" style="float: left;
+    margin-right: 4px;">0.0</span>
+    <img style="width: 21px;" src="assets/imgs/new-grey-star.svg">
+  </div>
+ 
+  
+ <!--<ion-row *ngFor="let restaurantDetail of restaurantDetail" class="singleRow">
+    <ion-col text-left size="8">
+      <h5 class="marginZero">{{ restaurantDetail.name }}</h5>
+      <p class="away">{{ restaurantDetail.location }} 
+        <span *ngFor="let distanceArr of distanceArr">
+          <span *ngIf="distanceArr.restaurantId == restaurantDetail.restaurants_id">
+            ( {{ distanceArr.distance | roundoff }}Km away )
+          </span>
+          
+      </span>
+      </p>
+    </ion-col>
+    <ion-col text-right size="5">
+     
+    </ion-col>
+  </ion-row>-->
+  <h5 *ngFor="let singleCategoryDat of restaurantDetail" class="marginZero">{{ singleCategoryDat.name }}</h5>
+  <ion-row *ngFor="let singleCategoryDat of restaurantDetail">
+    <ion-col style="text-align: left;" size="8">
+      <h3 class="new-restaurant-address">{{ singleCategoryDat.location }}</h3> 
+    </ion-col>
+    <ion-col style="text-align: right;margin-right: 15px;">
+      <ng-container *ngFor="let distanceArr of distanceArr">
+        <span *ngIf="distanceArr.restaurantId == singleCategoryDat.restaurants_id && distanceArr.distance != 'NaN'">
+          <h3 style="font-size: 14px;
+          margin-top: 0;
+          font-weight: 400;">
+            <span>
+              <img style="width: 13px;" src="assets/imgs/new-location-img.svg">
+            </span>{{ distanceArr.distance | roundoff }}km
+          </h3>
+        </span>
+      </ng-container> 
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col style="padding-top: 0;text-align: left;" size="8">
+      <h3 class="new-reservations-count">1950 reservations</h3>
+    </ion-col>
+    <ion-col style="padding-top: 0;" style="text-align: right;margin-right: 15px;padding-top: 0;padding-bottom: 0;">
+      <span style="margin-right: 2px;">
+        <img style="width: 13px;" src="assets/imgs/new-red-dollar.svg">
+      </span>
+      <span style="margin-right: 2px;">
+        <img style="width: 13px;" src="assets/imgs/new-red-dollar.svg">
+      </span>
+      <span style="margin-right: 2px;">
+        <img style="width: 13px;" src="assets/imgs/new-white-dollar.svg">
+      </span>
+      <span style="margin-right: 2px;">
+        <img style="width: 13px;" src="assets/imgs/new-white-dollar.svg">
+      </span>
+      <span style="margin-right: 2px;">
+        <img style="width: 13px;" src="assets/imgs/new-white-dollar.svg">
+      </span>
+    </ion-col>
+  </ion-row>
+
+  <ion-row style="margin-bottom: 5px;">
+    <ion-col style="margin-bottom: 0;" class="bg_first" text-right size="5">
+      <img (click)="openDiv()" src="assets/imgs/new-persons-img.svg" class="userIcon">
+      <span (click)="openDiv()" *ngIf="personCount == '' || !personCount" class="personCount">
+        Pick Persons
+      </span>
+      <span (click)="openDiv()" *ngIf="personCount != '' && personCount" class="personCount">
+        {{ personCount }} Persons
+      </span>
+      <!--<ion-select placeholder="? Person" ok-text="Okay" cancel-text="Nah" [(ngModel)]="personCount">
+        <ion-select-option value="1">1 Person</ion-select-option>
+        <ion-select-option value="2">2 Person</ion-select-option>
+        <ion-select-option value="3">3 Person</ion-select-option>
+        <ion-select-option value="4">4 Person</ion-select-option>
+        <ion-select-option value="5">5 Person</ion-select-option>
+        <ion-select-option value="6">6 Person</ion-select-option>
+        <ion-select-option value="7">7 Person</ion-select-option>
+      </ion-select>-->
+      <div *ngIf="showDiv" class="showdiv">
+        <div style="height: 180px;overflow: auto;background: #fff;" lines="none">
+          <p (click)="getPersons(arrayPersons)" *ngFor="let arrayPersons of arrayPersons" class="person-count">
+            {{ arrayPersons.valuePresent }}
+          </p>
+          
+        </div>
+      </div>
+    </ion-col>
+    <ion-col style="margin-bottom: 0;" class="bg_first" (click)="pickDate()" text-left size="5">
+      <div *ngIf="date == '' || date == null" class="pick-date-p">
+        <img class="pick-date-img" src="assets/imgs/new-calendar-img.svg">
+        <span class="pick-date-span" >Pick Date</span>
+      </div>
+      <div *ngIf="date != null && date != ''" class="pick-date-p">
+        <img class="pick-date-img" src="assets/imgs/new-calendar-img.svg">
+        <span class="pick-date-span">17 May 2020</span>
+      </div>
+      <ion-datetime displayFormat="DDDD MMMM YYYY" min="2016-10-31" max="{{ maxDate }}" [(ngModel)]="myDate">
+      </ion-datetime>
+    </ion-col>
+  </ion-row>
+  <!--<ion-row padding>
+   <ion-col *ngFor="let discount of discounts; let i =index" text-center size="2" style="margin-right: 7px;">
+      <div *ngIf="discount" class="sidetagone" (click)="selectDiscount(discount , i)">
+        <img *ngIf="i != selectedDiscount" src="../assets/imgs/bg_discount.png">
+        <img *ngIf="i == selectedDiscount" src="../assets/imgs/bg-discount-selected.png">
+        
+        <div class="myOverlay">
+          <p class="bg_img_text white" style="margin-top: 1.9em;">-{{ discount.discount_rate }}%</p>
+          <p *ngIf="discount.type == 'Day'" class="sidetagP2-time">{{ discount.start_time | stringbreak }}</p>
+          <p *ngIf="discount.type == 'Item'" class="sidetagP2" >{{ discount.end_date }}</p>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>-->
+
+
+  <ion-row class="scrolling-wrapper-row">
+    <ion-col style="position: absolute;left: 0;padding-bottom: 0;">
+      <div class="scrolling-wrapper">
+        <ng-container *ngFor="let discount of discounts; let i =index">
+          <div (click)="selectDiscount(discount , i)" class="card">
+            <!--<img style="width: 60px;" src="assets/imgs/bg_discount.png" />-->
+            <img style="width: 60px;" *ngIf="i != selectedDiscount" src="../assets/imgs/bg_discount.png">
+            <img style="width: 60px;" *ngIf="i == selectedDiscount" src="../assets/imgs/bg-discount-selected.png">
+            <div class="myOverlay-new">
+              <!--<p class="white-new txtTwo-new" style="margin-top: 10px;">22:30</p>
+              <p class="white-new txtOne-new">-20%</p>-->
+              <p *ngIf="discount.type == 'Day'" class="white-new txtTwo-new" style="margin-top: 5px;margin-left: -1px;">{{ discount.start_time | stringbreak }}</p>
+            <p *ngIf="discount.type == 'Item'" class="white-new txtTwo-new" style="margin-top: 9px;">{{ discount.end_date }}</p>
+            <p *ngIf="discount.type == 'Day'" class="white-new txtOne-new">-{{ discount.discount_rate }}%</p>
+            <p *ngIf="discount.type == 'Item'" class="white-new txtOne-new" style="margin-top: 3px;">-{{ discount.discount_rate }}%</p>
+            </div> 
+          </div>
+        </ng-container>
+      </div>
+    </ion-col>
+  </ion-row>
+
+
+  <ion-row>
+    <ion-col [class.margin-lng]="discounts?.length > 0" style="padding: 0;">
+ <ion-toolbar class="cstomHeader" no-border-top>
+    <ion-segment [(ngModel)]="pet">
+      <ion-segment-button value="Menu" (ionSelect)="getAllMenu()">
+       Menu
+      </ion-segment-button>
+      <ion-segment-button value="About" (ionSelect)="getAbout()">
+        About
+      </ion-segment-button>
+      <ion-segment-button value="Reviews" (ionSelect)="getReviews()">
+        Reviews
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+  
+  <div [ngSwitch]="pet">
+    <ion-list *ngSwitchCase="'Menu'" style="background: #e0e0e0;">
+      <ion-card style="background: #fff;">
+        <ion-card-header style="padding-bottom: 5px;">
+          <ion-row>
+            <ion-col size="9" class="red">
+              Recommended Menu
+            </ion-col>
+            <ion-col *ngIf="displayableDiscount" size="3" style="text-align: right;
+            color: #EF9503;
+            font-weight: 550;">
+              {{ displayableDiscount }}%
+            </ion-col>
+            <ion-col *ngIf="!displayableDiscount" size="3" style="text-align: right;
+            color: #EF9503;
+            font-weight: 550;">
+              0%
+            </ion-col>
+          </ion-row>
+          <hr style="border-bottom: 1px solid #707070;">
+        </ion-card-header>
+        <ion-card-content>
+          <p>The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.</p>
+          
+          <ion-row class="align" text-left>
+            <ion-col class="red">MENU</ion-col>
+            <!--<ion-col class="red">BEFORE</ion-col>
+            <ion-col class="red">AFTER</ion-col>-->
+          </ion-row>
+          <ng-container *ngIf="dealsArray?.length == 0">
+            <ion-row *ngFor="let deal of deals" class="align" text-left>
+              <ion-col style="color: #000;">
+              {{ deal.deal_name }}</ion-col>
+              <ion-col size="3" style="text-align: right;
+             
+              color: #000;">
+              <p *ngIf="deal.oldvalue != '' && deal.oldvalue" style="background: #e0e0e0;
+              padding: 3px;
+              border-radius: 6px;
+              width: 100%;
+              text-align: center;">{{ deal.oldvalue }}</p>
+              <!--<p style="text-decoration: line-through;text-align: center;">2000</p>-->
+            </ion-col>
+              <!--<ion-col></ion-col>deal.price-->
+            </ion-row>
+          </ng-container>
+          <ng-container *ngIf="dealsArray?.length > 0">
+            <ion-row *ngFor="let deal of dealsArray" class="align" text-left>
+              <ion-col style="color: #000;">{{ deal.name }}</ion-col>
+              <ion-col size="3" style="text-align: right;
+              
+              color: #000;">
+                <p *ngIf="deal.newValue != '' && deal.newValue" style="background: #e0e0e0;
+                padding: 3px;
+                border-radius: 6px;
+                width: 100%;
+                text-align: center;">{{ deal.newValue }}</p>
+                <p *ngIf="deal.oldvalue != '' && deal.oldvalue" style="text-decoration: line-through;text-align: center;">{{ deal.oldvalue }}</p>
+              </ion-col>
+             <!--deal.price-->
+            </ion-row>
+          </ng-container>
+
+        </ion-card-content>
+      </ion-card>
+  
+      <ion-card style="background: #fff;">
+        <ion-card-header style="padding-top: 10px;padding-bottom: 10px;" class="red">
+          Special Conditions
+        </ion-card-header>
+        <ion-card-content style="text-align: left;" *ngFor="let restaurantDetail of restaurantDetail">
+          {{ restaurantDetail.terms_conditions }}
+        </ion-card-content>
+      </ion-card>
+      
+    </ion-list>
+    <ion-list *ngSwitchCase="'About'" style="background: #e0e0e0;">
+      <ion-card class="aboutHeader" style="background: #fff;">
+        <ion-card-header class="red" style="padding-top:12px;padding-bottom: 0px;" text-left>
+          About
+        </ion-card-header>
+        <hr style="color: #e0e0e0;
+        border-bottom: 1px solid #e0e0e0;width: 90%;">
+        <ion-card-content style="padding-top: 5px;" text-left>
+          <p>
+          {{ about }}  
+          </p>
+        </ion-card-content>
+        <ion-card-header class="red" text-left>
+          Atmosphere
+        </ion-card-header>
+        <ion-card-content style="padding-top: 5px;" text-left>
+          <p>
+            {{ atmosphere }}
+          </p>
+        </ion-card-content>
+        <ion-card-header class="red" text-left>
+          Facilites/Services
+        </ion-card-header>
+        <ion-card-content style="padding-top: 5px;" text-left>
+          <p>{{ services }}</p>
+        </ion-card-content>
+        <ion-card-header class="red" text-left>
+          Payment Options
+        </ion-card-header>
+        <ion-card-content style="padding-top: 5px;" text-left>
+          <p>{{ payment_options }}</p>
+        </ion-card-content>
+      </ion-card>
+      <ion-card style="background: #fff">
+        <ion-card-content style="padding-top: 5px;padding-left: 10px;
+        padding-right: 10px;">
+          <ion-row text-left>
+            <ion-col class="red">Operating Hours</ion-col>
+          </ion-row>
+          <ion-row class="align">
+            <ion-col offset="2">
+
+            </ion-col>
+            <ion-col size="3">
+              <p>Breakfast</p>
+            </ion-col>
+            <ion-col size="3">
+              <p>Lunch</p>
+            </ion-col>
+            <ion-col size="3">
+              <p>Dinner</p>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngFor="let openingHour of openingHours" class="align" >
+            <ion-col text-left style="color: #000;font-size: 12px;" size="3">{{ openingHour.name }}</ion-col>
+            <ion-col text-center><span class="gbDate">
+              Open all day from {{ openingHour.opening_time }}-{{ openingHour.closing_time }}
+            </span></ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      
+      <!--<ion-row class="align" >
+        <ion-col text-left>Tuesday</ion-col>
+        <ion-col text-center><span class="gbDate">6:00 AM- 11:00 PM</span></ion-col>
+      </ion-row>
+      <ion-row class="align" >
+        <ion-col text-left>Wednesday</ion-col>
+        <ion-col text-center><span class="gbDate">6:00 AM- 11:00 PM</span></ion-col>
+      </ion-row>
+      <ion-row class="align" >
+        <ion-col text-left>Thursday</ion-col>
+        <ion-col text-center><span class="gbDate">6:00 AM- 11:00 PM</span></ion-col>
+      </ion-row>
+      <ion-row class="align" >
+        <ion-col text-left>Friday</ion-col>
+        <ion-col  text-center><span class="gbDate">6:00 AM- 11:00 PM</span></ion-col>
+      </ion-row>-->
+      <!--<ion-card class="aboutHeader">
+        <ion-card-header class="red" style="padding-top:15px;" text-left>
+          Directions
+        </ion-card-header>
+        <ion-card-content text-left>
+          <p>The British use the term "header", but the American term "head-shot" the English simply refuse to adopt.</p>
+          
+        </ion-card-content>
+        
+      </ion-card>-->
+      
+    </ion-list>
+    <ion-list *ngSwitchCase="'Reviews'" style="background: #e0e0e0;">
+      <!--<p class="bigStars" text-center>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star"></ion-icon>
+      </p>-->
+      <!--<p class="bigStars" text-center>
+        <ionic4-star-rating #rating
+          activeIcon = "ios-star"
+          defaultIcon = "ios-star-outline"
+          activeColor = "#b40404"
+          defaultColor = "#b40404"
+          readonly = "false"
+          class="bigStars"
+          (ratingChanged)="onRateChange($event)"
+          fontSize = "30px"
+          >
+        </ionic4-star-rating>
+      </p>-->
+      <ion-card style="background: #fff;">
+        <ion-card-content>
+          <ion-row>
+            <ion-col size="8">
+              <p style="font-weight: 550;
+              font-size: 15px;
+              color: #4b4b4b;">Customer Ratings</p>
+            </ion-col>
+            <ion-col>
+              <p style="float: right;
+              color: #BBBBBB;
+              font-size: 14px;">{{ ratingCount }} Ratings</p>
+            </ion-col>
+          </ion-row>
+          <hr style="color: #e0e0e0;
+          border-bottom: 1px solid #e0e0e0;">
+          <ion-row>
+            <ion-col>
+              <h2 style="color: #4C4C4C;
+              text-align: left;
+              font-size: 32px;
+              font-weight: 550;
+              margin-left: 55px;
+              margin-top: 35px;">{{ rating_average | ratingroundoff }}</h2>
+
+              <p style="float: left;
+              margin-left: 48px;
+              margin-top: 5px;" *ngIf="rating_average > '4' && rating_average <= '5' || rating_average > '5'" class="smallStars">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+              </p>
+              <p style="float: left;
+              margin-left: 48px;
+              margin-top: 5px;" *ngIf="rating_average > '3' && rating_average <= '4'" class="smallStars">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+              </p>
+              <p style="float: left;
+              margin-left: 48px;
+              margin-top: 5px;" *ngIf="rating_average > '2' && rating_average <= '3'" class="smallStars">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+              </p>
+              <p style="float: left;
+              margin-left: 48px;
+              margin-top: 5px;" *ngIf="rating_average > '1' && rating_average <= '2'" class="smallStars">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+              </p>
+              <p style="float: left;
+              margin-left: 48px;
+              margin-top: 5px;" *ngIf="rating_average > '0' && rating_average <= '1'" class="smallStars">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+              </p>
+              <p style="float: left;
+              margin-left: 48px;
+              margin-top: 5px;" *ngIf="rating_average == '0'" class="smallStars">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+              </p>
+              <p style="float: left;
+              margin-left: 48px;
+              margin-top: 5px;" *ngIf="rating_average == '' || rating_average == null" class="smallStars">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+              </p>
+              
+            </ion-col>
+            <ion-col style="margin-right: 15px;
+            margin-top: 15px;">
+              <p style="float: right;
+              margin-left: 48px;
+              margin-top: 5px;" *ngIf="fiveStarCount > '0'" class="smallStars">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <span style="font-weight: 550;
+                margin-left: 5px;
+                font-size: 15px;">{{ fiveStarCount }}</span>
+              </p>
+              <p style="float: right;
+              margin-left: 48px;
+              margin-top: 5px;" *ngIf="fourStarCount > '0'" class="smallStars">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <span style="font-weight: 550;
+                margin-left: 5px;
+                font-size: 15px;">{{ fourStarCount }}</span>
+              </p>
+              <p style="float: right;
+              margin-left: 48px;
+              margin-top: 5px;" *ngIf="threeStarCount > '0'" class="smallStars">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+              <span style="font-weight: 550;
+              margin-left: 5px;
+              font-size: 15px;">{{ threeStarCount }}</span>
+              </p>
+              <p style="float: right;
+              margin-left: 48px;
+              margin-top: 5px;" *ngIf="twoStarCount > '0'" class="smallStars">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+              <span style="font-weight: 550;
+              margin-left: 5px;
+              font-size: 15px;">{{ twoStarCount }}</span>
+              </p>
+              <p style="float: right;
+              margin-left: 48px;
+              margin-top: 5px;" *ngIf="oneStarCount > '0'" class="smallStars">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+              <span style="font-weight: 550;
+              margin-left: 5px;
+              font-size: 15px;">{{ oneStarCount }}</span>
+              </p>
+         
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card style="background: #fff;">
+        <ion-card-content>
+          
+            <ion-row>
+              <ion-col size="8">
+                <p style="font-weight: 550;
+                font-size: 15px;
+                color: #4b4b4b;">Customer Reviews</p>
+              </ion-col>
+              <ion-col>
+                <p style="float: right;
+                color: #BBBBBB;
+                font-size: 14px;">{{ reviewsCount }} Review</p>
+              </ion-col>
+            </ion-row>
+            <hr style="color: #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;">
+            <div *ngFor="let review of reviews">
+            <ion-row style="margin-top: 5px;">
+              <ion-col>
+                <p style="font-weight: 550;
+                text-transform: capitalize;
+                font-size: 15px;
+                color: #4b4b4b;">{{ review.user_name }}</p>
+                <p>{{ review.date_added }}</p>
+              </ion-col>
+              <ion-col>
+                
+                <p *ngIf="review.rating_stars == '5' || review.rating_stars > '5'" class="smallStars">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                </p>
+                <p *ngIf="review.rating_stars == '4'" class="smallStars">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                </p>
+                <p *ngIf="review.rating_stars == '3'" class="smallStars">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                </p>
+                <p *ngIf="review.rating_stars == '2'" class="smallStars">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                </p>
+                <p *ngIf="review.rating_stars == '1'" class="smallStars">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-yellow.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                </p>
+                <p *ngIf="review.rating_stars == '0'" class="smallStars">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                </p>
+                <p *ngIf="review.rating_stars == '' || review.rating_stars == null" class="smallStars">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                  <img style="width: 12px;" src="assets/imgs/new-rating-star-grey.svg">
+                </p>
+                
+              </ion-col>
+            </ion-row>
+            <ion-row style="margin-top: 6px;">
+              <ion-col>
+                <p>{{ review.feedback }}</p>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!--imp-->
+      <!--<p class="smallStars">
+        <ion-icon *ngIf="grayStarOne" (click)="grayStar(1)" ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon *ngIf="redStarOne" (click)="redStar(1)" ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon *ngIf="grayStarTwo" (click)="grayStar(2)" ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon *ngIf="redStarTwo" (click)="redStar(2)" ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon *ngIf="grayStarThree" (click)="grayStar(3)" ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon *ngIf="redStarThree" (click)="redStar(3)" ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon *ngIf="grayStarFour" (click)="grayStar(4)" ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon *ngIf="redStarFour" (click)="redStar(4)" ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon *ngIf="grayStarFive" (click)="grayStar(5)" ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon *ngIf="redStarFive" (click)="redStar(5)" ios="ios-star" md="md-star" class="red"></ion-icon>
+      </p>-->
+
+      <!--<p *ngIf="singleCategoryDat.rating_count == '4'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+      </p>
+     <p *ngIf="singleCategoryDat.rating_count == '4'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+      </p>
+      <p *ngIf="singleCategoryDat.rating_count == '3'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+      </p>
+      <p *ngIf="singleCategoryDat.rating_count == '2'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+      </p>
+      <p *ngIf="singleCategoryDat.rating_count == '1'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+      </p>
+      <p *ngIf="singleCategoryDat.rating_count == '0'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+      </p>-->
+       <!--imp-->
+      <!--
+      <p text-center>{{ reviewsCount }} Reviews</p>
+      <ion-row *ngFor="let review of reviews">
+        <ion-col size="6">
+          <p class="red revText" text-left >{{ review.user_name }}</p>
+        </ion-col>
+        <ion-col size="6">
+        
+          <p *ngIf="review.rating_stars == '5' || review.rating_stars > '5'" class="smallStars">
+            <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+          </p>
+          <p *ngIf="review.rating_stars == '4'" class="smallStars">
+            <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+          </p>
+          <p *ngIf="review.rating_stars == '3'" class="smallStars">
+            <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+          </p>
+          <p *ngIf="review.rating_stars == '2'" class="smallStars">
+            <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+          </p>
+          <p *ngIf="review.rating_stars == '1'" class="smallStars">
+            <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+          </p>
+          <p *ngIf="review.rating_stars == '0'" class="smallStars">
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+          </p>
+          <p *ngIf="review.rating_stars == '' || review.rating_stars == null" class="smallStars">
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+            <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+          </p>
+        </ion-col>
+        <ion-col size="12">
+          <span>
+            {{ review.feedback }}
+          </span>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+        <ion-col>
+          <ion-textarea placeholder="Write Reviews" [(ngModel)]="reviewValue"  color="danger" rows="6" cols="20"></ion-textarea>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col text-center size="12">
+          <ion-button  round color="primary" (click)="submitReview()" shape="round" >Submit</ion-button>
+        </ion-col>
+      </ion-row>-->
+    </ion-list>
+  </div>
+</ion-col>
+
+</ion-row>
+<div #map id="map"></div>
+</ion-content>
+<ion-footer style="padding: 15px;
+margin: 0px;" (click)="goToRestaurantDetails()" text-center>
+  <h1 class="white" style="margin:0px;
+  font-size: 14px;
+  font-weight: 550;
+  text-transform: capitalize;"
+>NEXT</h1>
+</ion-footer>

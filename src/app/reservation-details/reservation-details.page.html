@@ -1,0 +1,130 @@
+<ion-header class="header_background">
+  <ion-toolbar class="header_background">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Reservation Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card><!--let reservationDetail of reservationDetails-->
+    <img src="../assets/imgs/menuone.png"/>
+    <div class="catsubtwo">
+      <p class="white">Ramadah Hotel</p><!--{{ reservationDetail.hotelname }}-->
+      <p class="white">Canal Road ( 90Km away )</p><!--{{ reservationDetail.hotellocation }}--><!--{{ reservationDetail.distance }}-->
+      <!--<ionic4-star-rating #rating
+      activeIcon = "ios-star"
+      defaultIcon = "ios-star-outline"
+      activeColor = "#ff0000"
+      defaultColor = "#aaaaaa"
+      readonly = "true"
+      rating = "5"
+      fontSize = "20px"
+      >
+      </ionic4-star-rating>-->
+      <p *ngIf="restaurantDetail.rating_count == '5' || restaurantDetail.rating_count > '5'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+      </p>
+      <p *ngIf="restaurantDetail.rating_count == '4'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+      </p>
+      <p *ngIf="restaurantDetail.rating_count == '3'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+      </p>
+      <p *ngIf="restaurantDetail.rating_count == '2'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+      </p>
+      <p *ngIf="restaurantDetail.rating_count == '1'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="red"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+      </p>
+      <p *ngIf="restaurantDetail.rating_count == '0'" class="smallStars">
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+        <ion-icon ios="ios-star" md="md-star" class="grey"></ion-icon>
+      </p>
+    </div>
+    <div class="sidetagone">
+      <img src="assets/imgs/bg_discount.png" />
+      <div class="myOverlay">
+        <p class="white txtOne">-5%</p>
+        <p class="white txtTwo" >22-25</p>
+      </div>
+    </div>
+    
+  </ion-card> 
+ 
+  <ion-row class="detailBorder" padding>
+    <ion-col size="12"> <h3  class="red"  text-center><b>User Details</b></h3></ion-col>
+    <ion-col class="red" text-left size="6">Name</ion-col><!--name-->
+    <ion-col text-right size="6">{{ name }}</ion-col>
+    <ion-col class="red"  text-left size="6">Email</ion-col>
+    <ion-col text-right col-6>{{ email }}</ion-col>
+    <ion-col  class="red" text-left size="6">Phone Number</ion-col>
+    <ion-col *ngIf="number != null && number != ''" text-right size="6">{{ number }}</ion-col>
+    <ion-col *ngIf="number == null || number == ''" text-right size="6">Number not added</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col text-center>
+      <p style="margin-top: 0px;">*When Visit the resturant then scan the Qr code that you find there to avail discounts</p>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col text-center>
+      <img src="../assets/imgs/qrcode.png" style="width: 120px;">
+    </ion-col>
+  </ion-row>
+  
+  <!--<ion-footer  text-center padding>
+     <h1 class="white" style="margin:0px;">Scan</h1>
+  </ion-footer>-->
+  <ion-card class="welcome-card">
+    <img src="/assets/scan.jpeg" alt="" />
+    <ion-card-header>
+      <ion-card-subtitle>Get Started</ion-card-subtitle>
+      <ion-card-title> QR Code and Barcode </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Here we can scan a Qr code or Barcode to get data and we will also see how to generate Barcode.</p>
+    </ion-card-content>
+    <ion-button expand='block' margin (click)="goToQrScan()">Click to scan a barcode</ion-button>
+    <div *ngIf="scannedData">
+      <p>
+        Scanned Code Text : <b>{{ scannedData["text"] }}</b>
+      </p>
+      <p>
+        Scanned Code Format : <b>{{ scannedData["format"] }}</b>
+      </p>
+    </div>
+  </ion-card>
+
+  <ion-card>
+    <h1>Enter Value to Create QR code</h1>
+    <ion-input type="text" [(ngModel)]="encodedData"></ion-input>
+
+    <ion-button (click)="goToCreateCode()">
+      Create QR
+    </ion-button>
+  </ion-card>
+</ion-content>

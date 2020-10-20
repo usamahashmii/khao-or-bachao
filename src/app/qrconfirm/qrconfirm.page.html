@@ -1,0 +1,230 @@
+<!--<ion-header class="header_background">
+  <ion-toolbar class="header_background">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Reservation Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card *ngFor="let restaurantDetail of restaurantDetail">
+    <img src="../assets/imgs/menuone.png"/>
+    <div class="catsubtwo">
+      <p class="white">{{ restaurantDetail.name }}</p>
+      <p class="white">{{ restaurantDetail.location }} 
+        <span *ngFor="let distanceArr of distanceArr">
+          <span *ngIf="distanceArr.restaurantId == restaurantDetail.restaurants_id">
+            ( {{ distanceArr.distance | roundoff }}Km away )
+          </span>
+          
+      </span>
+      <span><img class="person-img-size" src="assets/imgs/person-img.png">
+        </span>
+      <span class="person-count">{{ personsCount }} Person</span>
+      </p>
+      <p class="stars">
+        <ionic4-star-rating #rating
+        activeIcon = "ios-star"
+        defaultIcon = "ios-star-outline"
+        activeColor = "#ff0000"
+        defaultColor = "#aaaaaa"
+        readonly = "true"
+        rating = "{{ restaurantDetail.rating_count }}"
+        fontSize = "20px"
+        >
+      </ionic4-star-rating>
+      </p>
+    </div>
+    <div class="sidetagone">
+      <img src="assets/imgs/bg_discount.png" />
+      <div class="myOverlay">
+        <p class="white txtOne">-{{ discount_rate }}%</p>
+        <p *ngIf="type == 'Day'" class="white txtTwo" >{{ start_time | stringbreak }}</p>
+        <p *ngIf="type == 'Item'" class="white txtTwo" >{{ end_date }}</p>
+      </div>
+    </div>
+    
+  </ion-card> 
+ 
+  <ion-row class="detailBorder" padding>
+    <ion-col size="12"> <h3  class="red"  text-center><b>User Details</b></h3></ion-col>
+    <ion-col class="red" text-left size="6">Name</ion-col>
+    <ion-col text-right size="6">{{ name }}</ion-col>
+    <ion-col class="red"  text-left size="3">Email</ion-col>
+    <ion-col text-right col-6>{{ email }}</ion-col>
+    <ion-col  class="red" text-left size="6">Phone Number</ion-col>
+    <ion-col *ngIf="number" text-right size="6">{{ number }}</ion-col>
+    
+  </ion-row>
+  <ion-row *ngIf="loaderShow" class="loader-gif-row">
+    <ion-col>
+      <img class="loader-gif" src="assets/imgs/loader.gif">
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col text-center>
+      <p style="margin-top: 0px;font-size: 12px">*When Visit the resturant then scan the Qr code that you find there to avail discounts</p>
+    </ion-col>
+  </ion-row>
+
+ 
+  
+</ion-content>
+<ion-footer (click)="scanCode()" text-center padding>
+  <h1 class="white-footer">Scan Qr</h1>
+</ion-footer>
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <img style="height: 15px;margin-left: 20px;" (click)="goToHome()" src="assets/imgs/new-reservnew-back-img.svg">
+     </ion-buttons>
+     <ion-title style="padding-left: 16%;color: #b40404;">Reservation Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--<ion-row>
+    <ion-col size="12" text-center>
+      <h4 class="hotel_name">{{ restName }}</h4>
+    </ion-col>
+  </ion-row>-->
+  <p style="font-weight: 550;
+  color: #505050;
+  margin-left: 10px;
+      font-size: 14px;">Reservation summary</p>
+      <hr style="border-bottom: 1px solid #F2F2FD;">
+      <ion-row style="padding: 50px;
+      padding-top: 0;
+      padding-bottom: 0;">
+        <ion-col>
+          <img style="width: 40px;" src="assets/imgs/success-img-left.png">
+        </ion-col>
+        <ion-col>
+          <img style="width: 40px;" src="assets/imgs/success-img.png">
+        </ion-col>
+        <ion-col size="8">
+          <h3 class="success">Success!</h3>
+        </ion-col>
+      </ion-row>
+      <h4 class="confirm-reservation-text">Your reservation is confirmed!</h4>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <p class="col-left-side">Restaurant Name:</p>
+      </ion-col>
+      <ion-col>
+        <p class="col-right-side">{{ restName }}</p>
+      </ion-col>
+    </ion-row>
+    <hr style="border-bottom: 1px solid #F2F2FD;">
+    <ion-row>
+      <ion-col>
+        <p class="col-left-side">Date:</p>
+      </ion-col>
+      <ion-col>
+        <p class="col-right-side">{{ reservationDate }}</p>
+      </ion-col>
+    </ion-row>
+    <hr style="border-bottom: 1px solid #F2F2FD;">
+    <ion-row *ngIf="discount_rate != ''">
+      <ion-col>
+        <p class="col-left-side">Item & Discount:</p>
+      </ion-col>
+      <ion-col>
+        <p class="col-right-side">{{ start_time }} - {{ discount_rate }}% off</p>
+      </ion-col>
+    </ion-row>
+    <hr *ngIf="discount_rate != ''" style="border-bottom: 1px solid #F2F2FD;">
+    <ion-row>
+        <ion-col>
+          <p class="col-left-side">Covers:</p>
+        </ion-col>
+        <ion-col>
+          <p class="col-right-side">{{ personsCount }} People</p>
+        </ion-col>
+    </ion-row>
+    <hr style="border-bottom: 1px solid #F2F2FD;">
+    <ion-row>
+      <ion-col>
+          <p class="col-left-side">Name:</p>
+        </ion-col>
+        <ion-col>
+          <p class="col-right-side">{{ personName }}</p>
+        </ion-col>
+    </ion-row>
+    <hr style="border-bottom: 1px solid #F2F2FD;">
+    <ion-row>
+        <ion-col>
+          <p class="col-left-side">Email:</p>
+        </ion-col>
+        <ion-col>
+          <p class="col-right-side">{{ personEmail }}</p>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!--<ion-card style="margin: 0;box-shadow: none;
+  border-bottom: 1px solid #707070;">
+    <ion-card-content style="padding: 0;">
+      <ion-row style="padding: 0px 1em;">
+        <ion-col size="7">
+           
+            <p class="img_text"><img src="assets/imgs/new-calendar-reservnew.svg" ><span>{{ reservationDate }}</span></p>
+            <p class="img_text"><img src="assets/imgs/new-persons-reservnew.svg" ><span>{{ persons }} Person</span></p>
+            <p class="img_text"><img src="assets/imgs/new-time-reservnew.svg" ><span>{{ start_time }}/{{ discount_rate }}%</span></p>
+            <p class="img_text"><img src="assets/imgs/new-location-reservnew.svg" ><span>{{ location }}</span></p>
+           
+        </ion-col>
+        <ion-col size="5">
+          <ion-row>
+            <ion-col size="12" style="text-align: right;">
+                <img *ngIf="restaurantImageUrl && restaurantImage" src="{{ restaurantImageUrl }}{{ restaurantImage }}" style="height: 5.5em;
+                width: 5.5rem;
+                border-radius: 5px;">
+              
+            </ion-col>
+          </ion-row>
+        </ion-col>
+    </ion-row>
+    </ion-card-content>
+  </ion-card>-->
+
+<!--<ion-row class="bgColor" >
+
+  <ion-col (click)="openRestaurantLocation()" size="12" text-center>
+    <img src="assets/imgs/r-largelocation.png" class="rImage">
+    <p class="parah">Location</p>
+  </ion-col>
+ 
+</ion-row>
+<ion-row class="raccordin" style="margin-top: 23px;">
+  <ion-col size="2" text-center>
+    <img src="assets/imgs/r-policy.png" class="accordImage" >
+  </ion-col>
+  <ion-col (click)="handleButtonClickPolicy()" size="8">
+      <h5>Restaurant Privacy Policy</h5>
+  </ion-col>
+  <ion-col size="2" text-center>
+    <ion-icon name="arrow-forward" style="margin-top: 1em;"></ion-icon>
+  </ion-col>
+</ion-row>
+<ion-row class="raccordin">
+  <ion-col size="2" text-center>
+    <img src="assets/imgs/r-terms.png" class="accordImage" >
+  </ion-col>
+  <ion-col (click)="handleButtonClickConditions()" size="8">
+      <h5>Terms and conditions</h5>
+  </ion-col>
+  <ion-col size="2" text-center>
+    <ion-icon name="arrow-forward" style="margin-top: 1em;"></ion-icon>
+  </ion-col>
+</ion-row>-->
+</ion-content>
+
+<ion-footer style="height: 25px;background: #e0e0e0;padding-top: 25px;
+padding-bottom: 25px;" (click)="scanCode()" text-center padding>
+  <h1 style="margin: 0;color: #b40404;
+  font-weight: 550;
+  line-height: 0;" class="white-footer">Scan Qr</h1>
+</ion-footer>

@@ -1,0 +1,65 @@
+
+<ion-content  no-border fullscreen="true"  class="ion-padding background no-scroll">
+  <ion-toolbar class="new-background-color">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+  
+  <ion-list class="items-middle" class="ion-text-center">
+   <ion-row>
+      <ion-col style="padding-left: 0px;" class="ion-text-left" size="col-4">
+          <img src="assets/imgs/khaobchao.png" width="40%">
+      </ion-col>
+      <ion-col size="3" offset="3">
+
+      </ion-col>
+    </ion-row>
+    <p class="oneTap">One Tap Login</p>
+    <p (click)="loginwithFacebook()" class="ion-text-center"> <img src="assets/imgs/fblogin.png" width="60%"></p>
+    <p class="or">Or</p>
+     <h3 class="main_heading ion-text-left">Login</h3>
+    <p class="font-color ion-text-left">
+      Please Enter Your Login Details.
+    </p>
+    <ion-item>
+      <ion-icon name="mail" slot="start"></ion-icon>
+      <ion-label color="ligh-grey" position="floating">Email</ion-label>
+      <ion-input [(ngModel)]="email"
+      clearInput
+      type="email"
+      (ionFocus)="checkFocusEmail()"
+      (ionBlur)="checkBlurEmail()" 
+      (ionChange)="emailKeyUp()"
+       ></ion-input>
+    </ion-item>
+    <h4 *ngIf="validationEmail" class="name-validation">Please fill the required field</h4>
+    <h4 *ngIf="keyupEmailBool" class="name-validation">Your Email is Invalid</h4>
+    <ion-item >
+      <ion-icon name="lock" slot="start"></ion-icon>
+      <ion-label color="ligh-grey" position="floating" >Password</ion-label>
+      <ion-input [(ngModel)]="password" 
+      clearInput 
+      type="password" 
+      (ionFocus)="checkFocusPassword()"
+      (ionBlur)="checkBlurPassword()" 
+      (ionChange)="passwordKeyUp()" 
+      [value]="password"
+      ></ion-input>
+    </ion-item>
+    <h4 *ngIf="validationPassword" class="name-validation">Please fill the required field</h4>
+    <h4 *ngIf="characterLengthPasswordBool" class="name-validation">Password is too weak</h4>
+    <p class="par" class="ion-text-center">Forgot Password? <a (click)="resetPassword()">Reset here</a></p>
+    <ion-row *ngIf="loaderShow" class="loader-gif-row">
+      <ion-col>
+        <img class="loader-gif" src="assets/imgs/loader.gif">
+      </ion-col>
+    </ion-row>
+    <ion-button class="button-login" color="danger" (click)="login()" shape="round">Login</ion-button>
+  </ion-list>
+  <ion-row class="lastRow" class="ion-padding">
+    <ion-col class="ion-text-center">
+        <p style="color:#bfbfbf;margin: 0px;"><span class="newUser">New User?<a (click)="signupPage()">Signup here</a></span></p>
+    </ion-col>
+  </ion-row>
+</ion-content>

@@ -1,0 +1,25 @@
+<ion-header class="header_background">
+  <ion-toolbar class="header_background">
+    <ion-buttons slot="start">
+      <img (click)="openSideMenu()" style="width: 68px;" src="assets/imgs/headerLogo.png">
+    </ion-buttons>
+    <ion-title><div class="vl"></div> Here</ion-title>
+    <ion-buttons slot="end">
+      <span class="home-header-city">{{ cityName }}</span>
+      <!--<span>
+        <img class="home-header-home-loc" src="assets/imgs/home-loc-icon.png">
+      </span>-->
+      <span>
+        <img (click)="openSearchRestaurant()" class="home-header-location-search" src="assets/imgs/location-search.png">
+      </span>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-row *ngIf="loaderShow" class="loader-gif-row">
+    <ion-col text-center>
+      <img class="loader-gif" src="assets/imgs/loader.gif">
+    </ion-col>
+  </ion-row>
+  <div #map id="map"></div> 
+</ion-content>

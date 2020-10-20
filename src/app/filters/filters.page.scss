@@ -1,0 +1,109 @@
+.loader-gif-row{
+    position: absolute;
+    margin-top: 80%;
+    z-index: 9;
+    text-align: center;
+  }
+  .loader-gif{
+    width: 60%;
+    background: none;
+  }
+.ion-alpha-scroll .scroll-content::-webkit-scrollbar {
+    display: none;
+  }
+ .item-radio-checked{
+    background: #b40404;
+    
+    /*.lb{
+      background: #b40404;
+      margin: 0px;
+      padding: 0px;
+    }*/
+    .filter-label{
+      background: #b40404;
+    }
+    ion-label p{
+      color:#fff;
+    }
+  } 
+  
+  .filter-label{
+   // padding: 16px;
+    margin-right: 1.0em;
+    border-radius: 5px;
+    text-align: center;
+    border: 2px solid #b40404;
+    p{
+      color:#b40404;
+    }
+  } 
+  ion-radio{
+    --color:transparent;
+    --color-checked: transparent;
+    position: absolute;
+    left: 15%;
+    height: 38%;
+    width: 42%;
+    top: 22%;
+  }
+  .red{
+    color:#b40404;
+  }
+ion-range{
+  --bar-height:5px;
+  --knob-size:20px;
+  --ion-color-base: #b40404 !important;
+  --ion-color-base-rgb: var(--ion-color-danger-rgb, 240, 65, 65) !important;
+  --ion-color-contrast: var(--ion-color-danger-contrast, #fff) !important;
+  --ion-color-contrast-rgb: var(--ion-color-danger-contrast-rgb, 255, 255, 255) !important;
+  --ion-color-shade: #b40404 !important;
+  --ion-color-tint: #b40404 !important;
+}
+.discounts.item-radio-checked{
+  background: #fff;
+  .discount-label{
+    background: #fff;
+    border: 2px solid #b40404;
+  }
+  ion-label p{
+    color:#b40404;
+  }
+
+} 
+
+.discount-label{
+  padding: 39px 0px;
+  text-align: center;
+  background: #b40404;
+  p{
+    color:#fff;
+    font-size: 22px;
+    font-weight: 700;
+  }
+} 
+.discountMinyLabel{
+  position: absolute;
+  bottom: 34%;
+  left: 12px;
+  color: #fff;
+}
+.ds{
+  margin-right: 5px;
+}
+.bg_badge{
+  background: #f7f7f7;
+}
+.backArw{
+  padding: 0px;
+  margin-left: 1em;
+  margin-top: 11px;
+}
+.headTitle{
+  position: relative;
+  top: 15px;
+}
+.filter-loc-icon-img{
+  width: 14px;
+  padding-top: 9px;
+  padding-bottom: 4px;
+}

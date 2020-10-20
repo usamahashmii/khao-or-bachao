@@ -1,0 +1,125 @@
+<ion-header class="header_background">
+  <ion-toolbar class="header_background">
+    <ion-buttons slot="start">
+      <img (click)="goBack()" src="assets/imgs/new-single-cat-img.svg">
+    </ion-buttons>
+    <ion-title>
+      Contact Us
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+  <ion-content>
+    
+    <ion-card style="box-shadow: 0px 0px 3px 0px #b9acac">
+      <ion-card-content>
+        <p style="font-weight: 500;
+        font-size: 14px;">user details</p>
+        <hr style="border-bottom: 1px solid #F2F2FD;">
+        <ion-row>
+          <ion-col style="padding-right: 0;padding: 0;" size="1">
+            <img style="width: 15px;margin-top: 48px;" src="assets/imgs/person-name-img.svg">
+          </ion-col>
+          <ion-col style="padding-left: 0;">
+            <ion-item [class.highlight-name-input]="validationName" style="margin-left: 10px;margin-bottom: 5px;">
+              <ion-label style="color: #000;
+              font-size: 14px;
+              font-weight: 350;" position="floating">name</ion-label>
+              <ion-input
+              (ionFocus)="checkFocusName()"
+              (ionBlur)="checkBlurName()"
+              (ionChange)="nameKeyUp()"
+              [value]="personName" [(ngModel)]="personName" ></ion-input>
+            </ion-item>
+            <h4 *ngIf="validationName" class="name-validation">Please fill the required field</h4>
+          <h4 *ngIf="keyupNameBool" class="name-validation">Your name is invalid</h4>
+          <h4 *ngIf="characterLengthNameBool" class="name-validation">Characters length is too long</h4>
+          </ion-col>
+        </ion-row>
+  <!----
+        <ion-row>
+          <ion-col style="padding-right: 0;padding: 0;" size="1">
+            <img style="width: 15px;margin-top: 48px;" src="assets/imgs/call-img.svg">
+          </ion-col>
+          <div (click)="presentPopover()" style="display: flex;
+          margin-top: 35px;">
+            <img style="margin-left: 2px;width: 20px;" src="assets/imgs/{{ countryFlag }}.svg">
+            <p style="color: #E58F08;margin-left: 5px;margin-top: 12px;font-size: 11px;">{{ phoneCode }}</p>
+            <img style="width: 10px;margin-left: 5px;margin-top: 6px;" src="assets/imgs/pick-phone-code-dropdown.svg">
+          </div>
+          <ion-col size="8" style="padding-left: 0;">
+            <ion-item style="margin-left: 10px;">
+              <ion-label style="color: #000;
+              font-size: 14px;
+              font-weight: 350;" position="floating">phone</ion-label>
+              <ion-input
+              maxlength="10" type="tel"
+              (ionFocus)="checkFocusMobile()"
+              (ionBlur)="checkBlurMobile()" 
+              [class.highlight-email-input]="colorMobileBool"
+              [(ngModel)]="phoneNumber"></ion-input>
+            </ion-item>
+            <p *ngIf="validationMobile" class="name-validation">Please fill the required field</p>
+            <p *ngIf="keyupNumberBool" class="name-validation">Phone Number is Invalid</p>
+            <p *ngIf="characterLengthNumberBool" class="name-validation">Characters Length is too Long</p>
+          </ion-col>
+        </ion-row>
+      -->
+        <ion-row>
+          <ion-col style="padding-right: 0;padding: 0;" size="1">
+            <img style="width: 15px;margin-top: 48px;" src="assets/imgs/email-img.svg">
+          </ion-col>
+          <ion-col style="padding-left: 0;">
+            <ion-item [class.highlight-email-input]="validationEmail" style="margin-left: 10px;margin-bottom: 5px;">
+              <ion-label style="color: #000;
+              font-size: 14px;
+              font-weight: 350;" position="floating">email</ion-label>
+              <ion-input
+              (ionFocus)="checkFocusEmail()"
+              (ionBlur)="checkBlurEmail()" 
+              (ionChange)="emailKeyUp()" 
+              [value]="email" [(ngModel)]="email" ></ion-input>
+            </ion-item>
+            <h4 *ngIf="validationEmail" class="name-validation">Please fill the required field</h4>
+            <h4 *ngIf="keyupEmailBool" class="name-validation">Your Email is Invalid</h4>
+          </ion-col>
+        </ion-row>
+
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card style="box-shadow: 0px 0px 3px 0px #b9acac">
+      <ion-card-content>
+
+        <p style="font-weight: 500;
+        font-size: 14px;">Your message</p>
+        <hr style="border-bottom: 1px solid #F2F2FD;">
+        <ion-row>
+          <ion-col style="padding-right: 0;padding: 0;" size="1">
+            <img style="width: 15px;margin-top: 48px;" src="assets/imgs/email-img.svg">
+          </ion-col>
+          <ion-col style="padding-right: 0;padding: 0;">
+            <ion-item [class.highlight-message-input]="validationMessage" style="margin-left: 10px;margin-bottom: 5px;">
+              <ion-label style="color: #000;
+              font-size: 14px;
+              font-weight: 350;" position="floating">your message</ion-label>
+              <ion-textarea
+              style="border: none"
+              (ionFocus)="checkFocusMessage()"
+              (ionBlur)="checkBlurMessage()" 
+              (ionChange)="messageKeyUp()" 
+              [value]="message" [(ngModel)]="message"></ion-textarea>
+            </ion-item>
+            <h4 *ngIf="validationMessage" class="name-validation">Please fill the required field</h4>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  <ion-row  >
+    <ion-col *ngIf="loaderShow" class="loader-gif-row">
+      <img class="loader-gif" src="assets/imgs/loader.gif">
+     </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer style="background: #b40404;" (click)="emailUs()" text-center padding>
+  <h1 class="white-footer">Send Message</h1>
+</ion-footer>

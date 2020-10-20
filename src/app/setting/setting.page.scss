@@ -1,0 +1,74 @@
+
+.red{
+    color: #b40404;
+}
+.item-md.item-block .item-inner{
+    border-bottom: none;
+}
+.profile-photo {
+    border-radius: 50% !important;
+    overflow: hidden;
+    height: 65px;
+    width: 65px;
+}
+.ProfleName{
+    margin-bottom: 0px;
+    margin-top: 16px !important;
+    color: #b40404;
+}
+.ProfleCity{
+    margin: 0px;
+    text-transform: capitalize;
+}
+ion-select{
+    padding-top: 16px !important;
+}
+.select-md .select-icon .select-icon-inner{
+    color:#b40404;
+}
+.language{
+    border: 1px solid #b40404;
+    border-radius: 40px;
+    margin-bottom: 0.9em;
+    
+}
+.radio-md .radio-checked {
+    border-color: #b20404;
+}
+.radio-md .radio-inner{
+    background-color: #b20404;
+}
+.item-radio-checked.item-md ion-label{
+    color: #b20404;
+}
+.item-input-has-focus .label-md[stacked], .input-has-focus .label-md[stacked], .item-input-has-focus .label-md[floating], .input-has-focus .label-md[floating] {
+    color: #b20404;
+}
+ion-toggle{
+    --background:#fff;
+    --background-checked:#b20404;
+    --handle-background:#fff;
+    --handle-background-checked:#fff;
+    
+  }
+  .toggle-inner{
+    --border: 1px solid rgba(180, 4, 4, 0.26);
+  }
+  .toggle-md.toggle-checked .toggle-icon {
+    background-color: #b40404;
+}
+.toggle-ios.toggle-checked .toggle-icon {
+    background-color: #b40404;
+}
+.toggle-md.toggle-checked .toggle-inner{
+    background-color: #ffffff;
+}
+.toggle-ios.toggle-checked .toggle-inner{
+    background-color: #ffffff;
+}
+.toggle-md{
+    height: 19px;
+}
+.toggle-md .toggle-inner{
+    top: -1px;
+}

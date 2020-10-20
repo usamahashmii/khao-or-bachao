@@ -1,0 +1,123 @@
+
+.list-md .item-block .item-inner{ 
+    border:none;
+}
+.label{
+  margin: 0px;
+  margin-top: 6px;
+}  
+.item{
+    border: 1px solid #b40404;
+    border-radius: 40px;
+    margin-bottom: 0.6em;
+}
+.icon-color{
+    font-size: 1.4em;
+    color: #b40404;
+}
+.item-inner{
+    margin-left: 5px !important;
+}
+.text-input{
+    margin-top: 0px !important; 
+}
+.label-ios[floating] , .label-md[floating] {
+    -webkit-transform: translate3d(0, 10px, 0);
+    transform: translate3d(0, 10px, 0);
+}
+.main_heading{
+    color: #b40404;
+    font-size: 30px;
+    font-weight: bolder;
+    margin-bottom: 0px;
+}
+.font-color{
+    color: #bfbfbf;
+    margin-top: 0px;
+}
+.updatebtn.button-md ,.updatebtn.button-ios{
+    background-color: #b40404 !important;
+    box-shadow: none !important;
+}
+input,a ,.par{
+    color: #b40404;
+}
+.oneTap{
+    color: #385c8e;
+    font-size: 17px;
+    margin: 0px;
+}
+.or{
+color: #b40404;
+margin: 0px;
+}
+.newUser{
+    border-bottom: 3px solid #c7c7c7;
+    padding-bottom: 3px;
+}
+.lastRow{
+     position: absolute;
+    bottom: 0px;
+    width: 100%;
+    left: 0px;
+}
+.profile-photo {
+    border-radius: 50% !important;
+    overflow: hidden;
+    height:65px;
+}
+.ProfleName{
+    margin-bottom: 0px;
+    margin-top: 10px !important;
+    color: #b40404;
+}
+.ProfleCity{
+    margin: 0px;
+    text-transform: capitalize;
+}
+.button-outline-md{
+    border-color: #b40404;
+    color: #b40404;
+}
+.button-outline-ios{
+    border-color: #b40404;
+    color: #b40404;
+}
+.item-input-has-focus .label-md[stacked], .input-has-focus .label-md[stacked], .item-input-has-focus .label-md[floating], .input-has-focus .label-md[floating] {
+    color: #b20404;
+}
+
+.arrowLeft{
+    width: 11px;
+    margin-top: 2px;
+    margin-left: 1em;
+}
+.settingRight{
+    width: 18px;
+    margin-top: 3px;
+    margin-left: -1em;
+}
+//hide loader spinner
+.loading-spinner.sc-ion-loading-md , .loading-spinner.sc-ion-loading-ios {
+    display: none;
+}
+.item-has-focus.label-floating.sc-ion-label-md-h, .item-has-focus .label-floating.sc-ion-label-md-h, .item-has-focus.label-stacked.sc-ion-label-md-h, .item-has-focus .label-stacked.sc-ion-label-md-h{
+    color:#b40404;
+}
+ion-input{
+    color:#b40404;
+}
+.name-validation{
+    color: #b40404;
+    font-size: 14px;
+    margin: 0;
+    text-align: left;
+}
+.ion-color-danger {
+    --ion-color-base: #b40404 !important;
+    --ion-color-base-rgb: var(--ion-color-danger-rgb, 240, 65, 65) !important;
+    --ion-color-contrast: var(--ion-color-danger-contrast, #fff) !important;
+    --ion-color-contrast-rgb: var(--ion-color-danger-contrast-rgb, 255, 255, 255) !important;
+    --ion-color-shade: #b40404 !important;
+    --ion-color-tint: #b40404 !important;
+}
