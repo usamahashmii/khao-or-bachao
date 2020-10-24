@@ -78,54 +78,81 @@ export class SearchrestaurantPage implements OnInit {
   constructor(public router: Router,
     public geolocation: Geolocation,
     public restService: RestService) { }
-
-  ngOnInit() {
+  ngOnInit(){
+    
+  }
+  ionViewWillEnter() {
     this.loaderShow = true;
     var stringy = JSON.stringify({
-      requestType: 'all',
+      requestType: 'all_restaurants',
     });
-    this.restService.getHereRestaurants(stringy).subscribe(response => {
+    this.restService.getAllRestaurants(stringy).subscribe(allResResponse => {
       this.loaderShow = false;
-      console.log(JSON.parse(response['_body']));
-      this.mapsResponse = JSON.parse(response['_body']).restaurant_data;
-      this.coverImageBaseUrl = JSON.parse(response['_body']).restaurants_img_url;
-      this.coverImage = JSON.parse(response['_body']).restaurants_img_url;
-      this.reservationCount = JSON.parse(response['_body']).reservation_count;
-      this.discounts = JSON.parse(response['_body']).discounts;
-      for(let i = 0; i < this.mapsResponse.length; i++){
-        this.distanceCalArray.push(this.mapsResponse[i]);
-      }
-      this.geolocation.getCurrentPosition().then((res) => {
-        // resp.coords.latitude
-        // resp.coords.longitude
-        //let location= 'lat'+ res.coords.latitude +'lang'+ res.coords.longitude;
-        let location='lat '+res.coords.latitude+' lang '+res.coords.longitude;
-        var lat1 = res.coords.latitude;
-        var lng1 = res.coords.longitude;
-        console.log(this.distanceCalArray);
-        for(let i = 0; i < this.distanceCalArray.length; i++){
-          var lat2 = this.distanceCalArray[i].latitude;
-          var lng2 = this.distanceCalArray[i].longitude;
-          var restaurantId = this.distanceCalArray[i].restaurants_id;
-          var d= this.getDistanceFromLatLonInKm((lat1),lng1,parseFloat(lat2),parseFloat(lng2) , restaurantId);
-          console.log(d);
-          this.distanceObj = {
-            restaurantId: '',
-            distance: ''
+      console.log(JSON.parse(allResResponse['_body']));
+      if(JSON.parse(allResResponse['_body']).status == "NotFound"){
+
+        var stringy = JSON.stringify({
+          requestType: 'new',
+        });
+        this.restService.getAllRestaurants(stringy).subscribe(response => {
+          this.loaderShow = false;
+          console.log(JSON.parse(response['_body']));
+          if(JSON.parse(response['_body']).status == "NotFound"){
+            
+          }else{
+            this.mapsResponse = JSON.parse(response['_body']).restaurant_data;
+            this.coverImageBaseUrl = JSON.parse(response['_body']).restaurants_img_url;
+            this.coverImage = JSON.parse(response['_body']).restaurants_img_url;
+            this.reservationCount = JSON.parse(response['_body']).reservation_count;
+            this.discounts = JSON.parse(response['_body']).discounts;
+            this.getRestaurantsData();
           }
-        this.distanceObj.restaurantId = restaurantId;
-        this.distanceObj.distance = d.toString();
-        this.distanceArr.push(this.distanceObj);
          
-        }
-        console.log(this.distanceArr);
-      }).catch((error) => {
-        console.log('Error getting location', error);
-      });
+        });
+      }else{
+        this.mapsResponse = JSON.parse(allResResponse['_body']).restaurant_data;
+        this.coverImageBaseUrl = JSON.parse(allResResponse['_body']).restaurants_img_url;
+        this.coverImage = JSON.parse(allResResponse['_body']).restaurants_img_url;
+        this.reservationCount = JSON.parse(allResResponse['_body']).reservation_count;
+        this.discounts = JSON.parse(allResResponse['_body']).discounts;
+        this.getRestaurantsData();
+      }
+     
     });
   }
  
-
+  getRestaurantsData(){
+    for(let i = 0; i < this.mapsResponse.length; i++){
+      this.distanceCalArray.push(this.mapsResponse[i]);
+    }
+    this.geolocation.getCurrentPosition().then((res) => {
+      // resp.coords.latitude
+      // resp.coords.longitude
+      //let location= 'lat'+ res.coords.latitude +'lang'+ res.coords.longitude;
+      let location='lat '+res.coords.latitude+' lang '+res.coords.longitude;
+      var lat1 = res.coords.latitude;
+      var lng1 = res.coords.longitude;
+      console.log(this.distanceCalArray);
+      for(let i = 0; i < this.distanceCalArray.length; i++){
+        var lat2 = this.distanceCalArray[i].latitude;
+        var lng2 = this.distanceCalArray[i].longitude;
+        var restaurantId = this.distanceCalArray[i].restaurants_id;
+        var d= this.getDistanceFromLatLonInKm((lat1),lng1,parseFloat(lat2),parseFloat(lng2) , restaurantId);
+        console.log(d);
+        this.distanceObj = {
+          restaurantId: '',
+          distance: ''
+        }
+      this.distanceObj.restaurantId = restaurantId;
+      this.distanceObj.distance = d.toString();
+      this.distanceArr.push(this.distanceObj);
+       
+      }
+      console.log(this.distanceArr);
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+  }
    // calculate distance
    getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2 , restaurantId) {
     var R = 6371; // Radius of the earth in km
